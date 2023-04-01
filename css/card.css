@@ -1,0 +1,8 @@
+.in_stock {
+    color: red;
+    font-size: small;
+}
+.add {
+    border-radius: 20px;
+    border-color: #333;
+}

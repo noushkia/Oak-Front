@@ -1,0 +1,27 @@
+p.text-caption.color-700 {
+    white-space: nowrap;
+    text-align: center;
+}
+
+div.footer-img-square-56 {
+    width: 56px;
+    height: 56px;
+}
+
+p.simple-footer {
+    font-family: Inter, cursive;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 29px;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #593C1C
+}
+
+footer {
+    padding: 20px;
+    bottom: 0;
+    width: 100%;
+    background: #F7F0E9;
+}
