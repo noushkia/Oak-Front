@@ -1,9 +1,9 @@
 .in_stock {
-    color: red;
+    color: #C82525;
     font-size: small;
 }
 .add {
-    border-radius: 20px;
+    border-radius: 10px;
     border-color: #333;
 }
 .a.disabled {

@@ -2,29 +2,6 @@
 <html lang="en">
 
 <style>
-    #logo {
-        width: 102px;
-        height: 94px;
-        left: 56px;
-        top: 10px;
-        border-radius: 47px;
-    }
-
-    #brand {
-        position: absolute;
-        width: 183px;
-        height: 72px;
-        left: 138px;
-        top: 33px;
-        font-family: 'Inter', cursive;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 42px;
-        line-height: 51px;
-        text-align: center;
-        color: #A97B47;
-    }
-
     .filter {
         font-family: 'Inter', cursive;
         font-style: normal;
@@ -42,11 +19,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/slider.css">
     <link rel="stylesheet" type="text/css" href="../css/card.css">
     <link rel="stylesheet" type="text/css" href="../css/footer.css">
     <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 
 
@@ -54,8 +32,8 @@
 <!--navigation bar-->
 <nav class="navbar sticky-top navbar-light bg-light justify-content-between">
     <form class="form-inline">
-        <img id="logo" src="../assets/images/svg/header/logo.svg" alt="Logo">
-        <a id="brand">Baloot</a>
+        <img class="baloot logo" src="../assets/images/svg/header/logo.svg" alt="Logo">
+        <a class="baloot brand">Baloot</a>
     </form>
     <form class="form-inline">
         <div class="dropdown">
@@ -66,8 +44,8 @@
             </div>
         </div>
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="display:none;" id="search"></button>
-        <img src="../assets/images/svg/header/search.svg" alt="Search" style="cursor:pointer; "
+        <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit"></button>
+        <img class="search" src="../assets/images/svg/header/search.svg" alt="Search"
              onclick="document.querySelector('.form-inline button[id=search]').click();">
     </form>
     <form class="form-inline">

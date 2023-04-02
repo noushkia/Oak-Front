@@ -1,0 +1,60 @@
+.navbar .baloot-logo {
+    width: 40%;
+    height: 81%;
+    left: 2.9%;
+    top: 0.5%;
+    border-radius: 47px;
+}
+
+.navbar .baloot-brand {
+    width: 9.5%;
+    height: 62%;
+    left: 7.1%;
+    top: 28%;
+
+    font-family: 'Inter', cursive;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 51px;
+    text-align: center;
+
+    color: #A97B47 !important;
+}
+
+.navbar .username {
+    width: 50%;
+    height: 80%;
+    left: auto;
+
+    font-family: 'Inter', cursive;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+
+    text-align: center;
+
+    color: #593C1C;
+}
+
+.navbar .btn-cart {
+    width: 50%;
+    height: 80%;
+    left: auto;
+    /*top: 25px;*/
+
+    border-color: #F7F0E9;
+    border-radius: 40px;
+}
+
+.bg-lightbrown {
+    background-color: #F7F0E9;
+}
+
+button.search {
+    display:none
+}
+
+img.search {
+    cursor:pointer
+}
