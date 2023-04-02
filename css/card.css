@@ -6,3 +6,7 @@
     border-radius: 20px;
     border-color: #333;
 }
+.a.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
