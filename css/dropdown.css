@@ -1,11 +1,26 @@
 /* Style the dropdown button */
 .dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
+    width: 100px;
+    background-color: #D8C1A8;
+    color: #593C1C;
+    padding: 14px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+}
+
+/* Style the down-ward arrow */
+.dropbtn::after {
+    content: "";
+    display: inline-block;
+    right: 10px;
+    top: 8px;
+    margin-left: 8px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #593C1C;
 }
 
 /* Style the dropdown content (hidden by default) */
@@ -30,5 +45,5 @@
 
 /* Change the background color of the links on hover */
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+    background-color: #F7F0E9;
 }

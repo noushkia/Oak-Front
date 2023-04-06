@@ -1,12 +1,68 @@
-.in_stock {
-    color: #C82525;
-    font-size: small;
-}
-.add {
+.card {
+    height: 20%;
+    width: 30%;
+    border: none;
     border-radius: 10px;
+
+    font-family: Inter, cursive;
+    font-style: normal;
+    font-weight: 600;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card .card-title {
+    color: #593C1C;
+    font-size: 22px;
+}
+
+.card .in_stock {
+    color: #C82525;
+    font-size: 11px;
+}
+
+.card .price {
+    color: #593C1C;
+    font-size: 18px;
+}
+
+.card .btn {
+    font-size: 14px;
+
+    background: #FFFFFF;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+
+    color: #593C1C;
+}
+
+.card .btn-group {
+    width: 50%;
+    height: 10%;
+}
+
+.card .btn-group button:not(:last-child) {
+    border-right: none;
+}
+
+.card .btn-group button:disabled {
+    opacity: 1;
+    background: #FFFFFF;
+    border-top: 1px solid #593C1C;
+    border-bottom: 1px solid #593C1C;
+
+    color: #593C1C;
+}
+
+.card .btn-group button:not(:first-child) {
+    border-left: none;
+}
+
+.card .add {
     border-color: #333;
 }
-.a.disabled {
+
+.card .a.disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }

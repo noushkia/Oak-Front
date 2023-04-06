@@ -1,37 +1,15 @@
-body {
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-}
-
-a {
-    color: blue;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-header {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-}
-
-h1 {
-    font-size: 2em;
+html, body {
+    height: 100%;
     margin: 0;
 }
 
-main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+.wrapper {
+    min-height: 100%;
+    margin-bottom: -50px; /* height of the footer */
 }
 
-img {
-    max-width: 100%;
-    height: auto;
+button, input, form, .btn, .filter {
+    border-radius: 15px;
 }
 
 footer {
@@ -39,4 +17,8 @@ footer {
     padding: 10px;
     text-align: center;
     font-size: 0.8em;
+
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
