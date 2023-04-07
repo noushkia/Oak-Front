@@ -66,3 +66,12 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.no-wrap-row {
+    flex-wrap: nowrap;
+}
+
+.no-wrap-row > .col-lg-3,
+.no-wrap-row > .col-md-6 {
+    flex-shrink: 0;
+}

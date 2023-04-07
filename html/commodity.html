@@ -7,69 +7,85 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/card.css">
-    <link rel="stylesheet" type="text/css" href="../css/footer.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/commodity.css">
 </head>
 
 <body>
-<!--navigation bar-->
-<nav class="navbar sticky-top navbar-light bg-light justify-content-between">
-    <form class="form-inline">
-        <img class="baloot-logo" src="../assets/images/svg/header/logo.svg" alt="Logo">
-        <a class="baloot-brand">Baloot</a>
-    </form>
-    <form class="form-inline">
-        <span class="navbar-text mr-2 username">Username</span>
-        <button class="btn btn-outline-secondary bg-lightbrown btn-cart" type="button"><span
-                class="navbar-text">Cart 0</span></button>
-    </form>
-</nav>
+<div class="wrapper">
 
-<!--commodity section-->
-<div class="container">
-    <!--    commodity info-->
-    <div class="row">
-        <div class="col-md-6">
-            <img src="../assets/images/svg/commodity/taha.jpg" alt="Image" style="width: 100%; height: 100%;">
-        </div>
-        <div class="col-md-6">
-            <div class="container">
+    <!--navigation bar-->
+    <nav class="navbar sticky-top navbar-light bg-light justify-content-between">
+        <form class="form-inline">
+            <img class="baloot-logo" src="../assets/images/svg/header/logo.svg" alt="Logo">
+            <a class="baloot-brand">Baloot</a>
+        </form>
+        <form class="form-inline">
+            <a class="text" href="#">#Kianoush</a>
+            <button class="btn cart empty" type="button"><span>Cart</span><span>0</span></button>
+        </form>
+    </nav>
+
+    <!--commodity section-->
+    <div class="container commodity">
+        <!--    commodity info-->
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <img class="image" src="../assets/images/svg/commodity/taha.jpg" alt="Commodity">
+            </div>
+            <div class="col-lg-6 col-md-12">
+
                 <div class="row">
-                    <h2>Taha</h2>
+                    <p class="title">Taha</p>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <h6 class="card-text in_stock">5 left in stock</h6>
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4 d-flex align-items-center">
-                        <img src="../assets/images/svg/commodity/star.svg" alt="Star"
-                             style="width: 20px; height: 20px;">
-                        <h6 class="mb-0 ml-2" style="font-size: 14px;"><b>4.1</b> <span
-                                style="font-size: 10px; opacity: 0.5;"> (12)</span></h6>
+
+                <div class="row justify-content-between">
+                    <p class="in_stock align-self-center">5 left in stock</p>
+                    <div class="d-flex align-self-center align-items-center justify-content-end rating">
+                        <img class="star" src="../assets/images/svg/commodity/star.svg" alt="Star">
+                        <p class="mb-0 ml-2 text">
+                            <span>4.1</span>
+                            <span>(12)</span>
+                        </p>
                     </div>
                 </div>
-                <b>by <a href="#">Fakh</a></b>
-                <h6>Categories</h6>
-                <ul class="list">
-                    <li>Technology</li>
-                    <li>IT</li>
-                </ul>
-                <div class="row" style="margin-top: 45%;">
-                    <div class="col-md-8">
-                        <b>$5</b>
+
+                <div class="category">
+                    <div class="row">
+                        <p>by <a href="#">Fakh</a></p>
                     </div>
-                    <div class="col-md-4">
-                        <a href="#" class="btn btn-light btn-sm add">add to buylist</a>
+
+                    <div class="row">
+                        <p>Categories</p>
+                    </div>
+                    <div class="row">
+                        <ul class="list">
+                            <li>Technology</li>
+                            <li>IT</li>
+                            <li>Slave</li>
+                            <li>Feshari</li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <a class="more" href="#">Show more...</a>
                     </div>
                 </div>
-                <div class="row" id="rate" style="margin-top: 5%;">
-                    <div class="col-md-8 d-flex align-items-center">
+
+
+                <div class="row buy d-flex align-items-center">
+                    <div class="col-md-6">
+                        <p class="text">300$</p>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <button class="btn" type="button">add to cart</button>
+                    </div>
+                </div>
+
+                <div class="row rate">
+                    <div class="col-md-6 d-flex align-items-center">
                         <div class="container">
                             <div class="row">
-                                <b>rate now</b>
+                                <p>rate now</p>
                             </div>
                             <div class="row">
                                 <img src="../assets/images/svg/commodity/star.svg" alt="Star"
@@ -95,193 +111,156 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 d-flex align-items-center">
-                        <button class="btn btn-dark">submit</button>
+                    <div class="col-md-6 d-flex align-items-center justify-content-end">
+                        <button class="btn">submit</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--    comments-->
-    <div class="row mt-3">
-        <h6 style="opacity: 0.6;"><b>Comments</b> <span style="opacity: 0.4;">(2)</span></h6>
-        <div class="col-md-12">
-            <div class="row">
-                <p><strong>Comment 1</strong></p>
+        <!--    comments-->
+        <div class="row mt-3 comment">
+            <div class="col-md-12 d-flex align-self-start title">
+                <span>Comments </span><span>(2)</span>
             </div>
-            <div class="row">
-                <p><small><em>2023-06-12</em> * User 1 </small></p>
-            </div>
-            <div class="row justify-content-end">
-                <p>Was this comment helpful?</p>
-                <p>1 <img src="../assets/images/svg/commodity/like.svg" alt="like"> &nbsp;&nbsp; 1 <img
-                        src="../assets/images/svg/commodity/dislike.svg" alt="dislike"></p>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="row">
-                <p><strong>Comment 2</strong></p>
-            </div>
-            <div class="row">
-                <p><small><em>2023-06-12</em> * User 2 </small></p>
-            </div>
-            <div class="row justify-content-end">
-                <p>Was this comment helpful?</p>
-                <p>1 <img src="../assets/images/svg/commodity/like.svg" alt="like"> &nbsp;&nbsp; 1 <img
-                        src="../assets/images/svg/commodity/dislike.svg" alt="dislike"></p>
-            </div>
-        </div>
-        <form>
-            <label for="comment">Submit your opinion</label>
-            <textarea class="form-control" id="comment" rows="3" cols="100%"></textarea>
-            <button type="submit" class="btn btn-dark">Post</button>
-        </form>
-    </div>
-</div>
 
-<!--suggested commodities-->
-<div class="container">
-    <h2>You might also like...</h2>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div class="col-md-12">
+                <p class="text">This was awesome!!!</p>
+                <p class="info"><span>2023-06-12</span><span class="bullet">&#8226;</span><span>#Kianoush</span></p>
+                <div class="d-flex justify-content-end vote">
+                    <p>Was this comment helpful?</p>
+                    <p>&nbsp;&nbsp; 1 <img src="../assets/images/svg/commodity/like.svg" alt="like"> &nbsp;&nbsp; 1 <img
+                            src="../assets/images/svg/commodity/dislike.svg" alt="dislike"></p>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <p class="text">This was a great slave!!!</p>
+                <p class="info"><span>2023-06-13</span><span class="bullet">&#8226;</span><span>#Amirfery</span></p>
+                <div class="d-flex justify-content-end vote">
+                    <p>Was this comment helpful?</p>
+                    <p>&nbsp;&nbsp; 1 <img src="../assets/images/svg/commodity/like.svg" alt="like"> &nbsp;&nbsp; 2 <img
+                            src="../assets/images/svg/commodity/dislike.svg" alt="dislike"></p>
+                </div>
+            </div>
+
+            <div class="col-md-12 submit">
+                <label for="comment">Submit your opinion</label>
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h2 class="card-title">Taha</h2>
-                                <h6 class="card-text in_stock">1 left in stock</h6>
-                                <img class="card-img-top image" src="../assets/images/svg/commodity/taha.jpg"
-                                     alt="Card image cap">
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <p class="card-text price">300$</p>
-                                    <a href="#" class="btn btn-light rounded-pill btn-sm add">add to buylist</a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-md-11">
+                        <textarea class="form-control new-comment" id="comment" rows="3" cols="100%"></textarea>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h2 class="card-title">Taha</h2>
-                                <h6 class="card-text in_stock">1 left in stock</h6>
-                                <img class="card-img-top image" src="../assets/images/svg/commodity/taha.jpg"
-                                     alt="Card image cap">
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <p class="card-text price">300$</p>
-                                    <a href="#" class="btn btn-light rounded-pill btn-sm add">add to buylist</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h2 class="card-title">Taha</h2>
-                                <h6 class="card-text in_stock">1 left in stock</h6>
-                                <img class="card-img-top image" src="../assets/images/svg/commodity/taha.jpg"
-                                     alt="Card image cap">
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <p class="card-text price">300$</p>
-                                    <a href="#" class="btn btn-light rounded-pill btn-sm add">add to buylist</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h2 class="card-title">Taha</h2>
-                                <h6 class="card-text in_stock">1 left in stock</h6>
-                                <img class="card-img-top image" src="../assets/images/svg/commodity/taha.jpg"
-                                     alt="Card image cap">
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <p class="card-text price">300$</p>
-                                    <a href="#" class="btn btn-light rounded-pill btn-sm add">add to buylist</a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-md-1 align-self-end">
+                        <button type="submit" class="btn btn-primary btn-block">Post</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
 
-<div class="footer-wrapper">
-    <footer>
-        <div class="row">
-            <div class="col">
-                <div class="col-md-2">
-                    <div class="footer-img-square-56">
-                        <img class="express-delivery-img"
-                             data-src="../assets/images/svg/footer/express-delivery.svg"
-                             alt="express-delivery"
-                             src="../assets/images/svg/footer/express-delivery.svg">
-                    </div>
-                    <p class="text-caption color-700">Express Delivery</p>
+    <!--suggested commodities-->
+    <div class="container suggestions">
+        <p class="title">You might also like...</p>
+        <div class="row my-4 no-gutters no-wrap-row justify-content-center">
+            <div class="col-lg-3 col-md-6 col-sm-12 card mx-2">
+                <h2 class="card-title">Taha</h2>
+                <h6 class="in_stock">2 left in stock</h6>
+                <img class="card-img-top image" src="../assets/images/svg/commodity/taha.jpg" alt="Card image cap">
+                <div class="card-body d-flex justify-content-between">
+                    <p class="card-text price">300$</p>
+                    <button class="btn" type="button">add to cart</button>
                 </div>
             </div>
-            <div class="col">
-                <div class="col-md-2">
-                    <div class="footer-img-square-56">
-                        <img class="cash-on-delivery-img"
-                             data-src="../assets/images/svg/footer/cash-on-delivery.svg"
-                             alt="cash-on-delivery"
-                             src="../assets/images/svg/footer/cash-on-delivery.svg">
-                    </div>
-                    <p class="text-caption color-700">Cash On Delivery</p>
+            <div class="col-lg-3 col-md-6 col-sm-12 card mx-2">
+                <h2 class="card-title">Taha</h2>
+                <h6 class="in_stock">0 left in stock</h6>
+                <img class="card-img-top image" src="../assets/images/svg/commodity/taha.jpg" alt="Card image cap">
+                <div class="card-body d-flex justify-content-between">
+                    <p class="card-text price">300$</p>
+                    <button class="btn" type="button" disabled>add to cart</button>
                 </div>
             </div>
-            <div class="col">
-                <div class="col-md-2">
-                    <div class="footer-img-square-56">
-                        <img class="days-return-img"
-                             data-src="../assets/images/svg/footer/days-return.svg"
-                             alt="days-return"
-                             src="../assets/images/svg/footer/days-return.svg">
-                    </div>
-                    <p class="text-caption color-700">Days Return</p>
+            <div class="col-lg-3 col-md-6 col-sm-12 card mx-2">
+                <h2 class="card-title">Taha</h2>
+                <h6 class="in_stock">2 left in stock</h6>
+                <img class="card-img-top image" src="../assets/images/svg/commodity/taha.jpg" alt="Card image cap">
+                <div class="card-body d-flex justify-content-between">
+                    <p class="card-text price">300$</p>
+                    <button class="btn" type="button">add to cart</button>
                 </div>
             </div>
-            <div class="col">
-                <div class="col-md-2">
-                    <div class="footer-img-square-56">
-                        <img class="original-products-img"
-                             data-src="../assets/images/svg/footer/original-products.svg"
-                             alt="original-products"
-                             src="../assets/images/svg/footer/original-products.svg">
-                    </div>
-                    <p class="text-caption color-700">Original Products</p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="col-md-2">
-                    <div class="footer-img-square-56">
-                        <img class="support-img"
-                             data-src="../assets/images/svg/footer/support.svg"
-                             alt="support"
-                             src="../assets/images/svg/footer/support.svg">
-                    </div>
-                    <p class="text-caption color-700">24-7 Support</p>
+            <div class="col-lg-3 col-md-6 col-sm-12 card mx-2">
+                <h2 class="card-title">Taha</h2>
+                <h6 class="in_stock">2 left in stock</h6>
+                <img class="card-img-top image" src="../assets/images/svg/commodity/taha.jpg" alt="Card image cap">
+                <div class="card-body d-flex justify-content-between">
+                    <p class="card-text price">300$</p>
+                    <button class="btn" type="button">add to cart</button>
                 </div>
             </div>
         </div>
-        <p class="simple-footer">Baloot @ UT</p>
-    </footer>
+    </div>
 </div>
+
+<footer>
+    <div class="row">
+        <div class="col">
+            <div class="col-md-2">
+                <div class="footer-img-square-56">
+                    <img class="express-delivery-img"
+                         data-src="../assets/images/svg/footer/express-delivery.svg"
+                         alt="express-delivery"
+                         src="../assets/images/svg/footer/express-delivery.svg">
+                </div>
+                <p class="text-caption color-700">Express Delivery</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col-md-2">
+                <div class="footer-img-square-56">
+                    <img class="cash-on-delivery-img"
+                         data-src="../assets/images/svg/footer/cash-on-delivery.svg"
+                         alt="cash-on-delivery"
+                         src="../assets/images/svg/footer/cash-on-delivery.svg">
+                </div>
+                <p class="text-caption color-700">Cash On Delivery</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col-md-2">
+                <div class="footer-img-square-56">
+                    <img class="days-return-img"
+                         data-src="../assets/images/svg/footer/days-return.svg"
+                         alt="days-return"
+                         src="../assets/images/svg/footer/days-return.svg">
+                </div>
+                <p class="text-caption color-700">Days Return</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col-md-2">
+                <div class="footer-img-square-56">
+                    <img class="original-products-img"
+                         data-src="../assets/images/svg/footer/original-products.svg"
+                         alt="original-products"
+                         src="../assets/images/svg/footer/original-products.svg">
+                </div>
+                <p class="text-caption color-700">Original Products</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col-md-2">
+                <div class="footer-img-square-56">
+                    <img class="support-img"
+                         data-src="../assets/images/svg/footer/support.svg"
+                         alt="support"
+                         src="../assets/images/svg/footer/support.svg">
+                </div>
+                <p class="text-caption color-700">24-7 Support</p>
+            </div>
+        </div>
+    </div>
+    <p class="simple-footer">Baloot @ UT</p>
+</footer>
 </body>
 </html>

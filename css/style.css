@@ -12,6 +12,14 @@ button, input, form, .btn, .filter {
     border-radius: 15px;
 }
 
+.bg-lightbrown {
+    background-color: #F7F0E9;
+}
+
+.bg-brown {
+    background-color: #593C1C;
+}
+
 footer {
     background-color: #ccc;
     padding: 10px;

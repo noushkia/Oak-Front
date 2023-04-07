@@ -3,15 +3,6 @@
 @import "card.css";
 @import "footer.css";
 
-.no-wrap-row {
-    flex-wrap: nowrap;
-}
-
-.no-wrap-row > .col-lg-3,
-.no-wrap-row > .col-md-6 {
-    flex-shrink: 0;
-}
-
 .container.home {
     margin-top: 2%;
     margin-bottom: 4%;
