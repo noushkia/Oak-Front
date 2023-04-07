@@ -1,0 +1,25 @@
+@import "general/navbar.css";
+@import "general/footer.css";
+
+.container.user {
+    margin-top: 2%;
+    margin-bottom: 4%;
+}
+
+.user {
+    font-family: Inter, cursive;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+
+    color: #593C1C;
+}
+
+.user img {
+    width: 20px;
+    height: 20px;
+}
+
+.user .credit {
+    font-size: 5rem;
+}

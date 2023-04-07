@@ -1,52 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>User</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/footer.css">
+    <link rel="stylesheet" type="text/css" href="../css/general/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../css/general/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/user.css">
 </head>
-<body>
-<!--navigation bar-->
-<nav class="navbar sticky-top navbar-light bg-light justify-content-between">
-    <form class="form-inline">
-        <img class="baloot-logo" src="../assets/images/svg/header/logo.svg" alt="Logo">
-        <a class="baloot-brand">Baloot</a>
-    </form>
-    <form class="form-inline">
-        <span class="navbar-text mr-2 username">Username</span>
-        <button class="btn btn-outline-secondary bg-brown btn-cart" type="button"><span
-                class="navbar-text user-cart">Cart 0</span></button>
-    </form>
-</nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
+<body>
+<div class="wrapper">
+
+    <nav class="navbar sticky-top navbar-light bg-light justify-content-between">
+        <form class="form-inline">
+            <img class="baloot-logo" src="../assets/images/svg/header/logo.svg" alt="Logo">
+            <a class="baloot-brand">Baloot</a>
+        </form>
+        <form class="form-inline">
+            <a class="text" href="#">#Kianoush</a>
+            <button class="btn cart" type="button"><span>Cart</span><span>4</span></button>
+        </form>
+    </nav>
+
+    <div class="container user d-flex">
+        <div class="col-lg-6 col-md-12">
             <div class="row">
-                <img src="../assets/images/svg/user/user.svg" alt="user">
-                <p>Marshal</p>
+                <div class="col-md-1">
+                    <img src="../assets/images/svg/user/user.svg" alt="user">
+                </div>
+                <div class="col-md-11">
+                    <p>Kianoush</p>
+                </div>
             </div>
             <div class="row">
-                <img src="../assets/images/svg/user/mail.svg" alt="user">
-                <p>Marshal@gmail.com</p>
+                <div class="col-md-1">
+                    <img src="../assets/images/svg/user/mail.svg" alt="user">
+                </div>
+                <div class="col-md-11">
+                    <p>kianoosharshi@gmail.com</p>
+                </div>
             </div>
             <div class="row">
-                <img src="../assets/images/svg/user/calendar.svg" alt="user">
-                <p>1972/12/12</p>
+                <div class="col-md-1">
+                    <img src="../assets/images/svg/user/calendar.svg" alt="user">
+                </div>
+                <div class="col-md-11">
+                    <p>1972/12/12</p>
+                </div>
             </div>
             <div class="row">
-                <img src="../assets/images/svg/user/location.svg" alt="user">
-                <p>2078 dardasht tehran kabol</p>
+                <div class="col-md-1">
+                    <img src="../assets/images/svg/user/location.svg" alt="user">
+                </div>
+                <div class="col-md-11">
+                    <p>2078 Dardasht Tehran Kabol</p>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
+
+        <div class="col-lg-6 col-md-12">
             <div class="row">
-                <p>$1000000</p>
+                <p class="credit">$10000000</p>
             </div>
             <div class="row">
                 <label for="add-amount">
@@ -58,90 +76,89 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="container" id="cart">
-    <div class="row d-flex">
-        <div class="col">
-            <img src="../assets/images/svg/user/cart.svg" alt="cart">
-            <b>Cart</b>
+    <div class="container cart" id="cart">
+        <div class="row d-flex">
+            <div class="col">
+                <img src="../assets/images/svg/user/cart.svg" alt="cart">
+                <b>Cart</b>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Categories</th>
-                    <th>Price</th>
-                    <th>Provider ID</th>
-                    <th>Rating</th>
-                    <th>In Stock</th>
-                    <th>In Cart</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity"
-                             style="width: 100px; height: auto;">
-                    </td>
-                    <td>Taha</td>
-                    <td>Slave</td>
-                    <td>$300</td>
-                    <td>14</td>
-                    <td>9.9</td>
-                    <td>5</td>
-                    <td>
-                        <div class="d-flex justify-content-end inp">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary minus-btn" type="button">-</button>
-                                </div>
-                                <div class="input-group-text px-3">1</div>
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary plus-btn" type="button">+</button>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Categories</th>
+                        <th>Price</th>
+                        <th>Provider ID</th>
+                        <th>Rating</th>
+                        <th>In Stock</th>
+                        <th>In Cart</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity"
+                                 style="width: 100px; height: auto;">
+                        </td>
+                        <td>Taha</td>
+                        <td>Slave</td>
+                        <td>$300</td>
+                        <td>14</td>
+                        <td>9.9</td>
+                        <td>5</td>
+                        <td>
+                            <div class="d-flex justify-content-end inp">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary minus-btn" type="button">-</button>
+                                    </div>
+                                    <div class="input-group-text px-3">1</div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary plus-btn" type="button">+</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col text-center">
+                <button class="btn btn-dark">Pay now!</button>
+            </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
-        <div class="col text-center">
-            <button class="btn btn-dark">Pay now!</button>
-        </div>
-    </div>
-</div>
 
-<div class="container" id="history">
-    <div class="row d-flex">
-        <div class="col">
-            <img src="../assets/images/svg/user/history.svg" alt="history">
-            <b>History</b>
+    <div class="container history" id="history">
+        <div class="row d-flex">
+            <div class="col">
+                <img src="../assets/images/svg/user/history.svg" alt="history">
+                <b>History</b>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Categories</th>
-                    <th>Price</th>
-                    <th>Provider ID</th>
-                    <th>Rating</th>
-                    <th>In Stock</th>
-                    <th>Quantity</th>
-                </tr>
-                </thead>
-                <tbody>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Categories</th>
+                        <th>Price</th>
+                        <th>Provider ID</th>
+                        <th>Rating</th>
+                        <th>In Stock</th>
+                        <th>Quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td>
                             <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity"
@@ -157,7 +174,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity" style="width: 100px; height: auto;">
+                            <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity"
+                                 style="width: 100px; height: auto;">
                         </td>
                         <td>Taha</td>
                         <td>Slave</td>
@@ -167,73 +185,72 @@
                         <td>0</td>
                         <td>3</td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="footer-wrapper">
-    <footer>
-        <div class="row">
-            <div class="col">
-                <div class="col-md-2">
-                    <div class="footer-img-square-56">
-                        <img class="express-delivery-img"
-                             data-src="../assets/images/svg/footer/express-delivery.svg"
-                             alt="express-delivery"
-                             src="../assets/images/svg/footer/express-delivery.svg">
-                    </div>
-                    <p class="text-caption color-700">Express Delivery</p>
+</div>
+<footer>
+    <div class="row">
+        <div class="col">
+            <div class="col-md-2">
+                <div class="footer-img-square-56">
+                    <img class="express-delivery-img"
+                         data-src="../assets/images/svg/footer/express-delivery.svg"
+                         alt="express-delivery"
+                         src="../assets/images/svg/footer/express-delivery.svg">
                 </div>
-            </div>
-            <div class="col">
-                <div class="col-md-2">
-                    <div class="footer-img-square-56">
-                        <img class="cash-on-delivery-img"
-                             data-src="../assets/images/svg/footer/cash-on-delivery.svg"
-                             alt="cash-on-delivery"
-                             src="../assets/images/svg/footer/cash-on-delivery.svg">
-                    </div>
-                    <p class="text-caption color-700">Cash On Delivery</p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="col-md-2">
-                    <div class="footer-img-square-56">
-                        <img class="days-return-img"
-                             data-src="../assets/images/svg/footer/days-return.svg"
-                             alt="days-return"
-                             src="../assets/images/svg/footer/days-return.svg">
-                    </div>
-                    <p class="text-caption color-700">Days Return</p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="col-md-2">
-                    <div class="footer-img-square-56">
-                        <img class="original-products-img"
-                             data-src="../assets/images/svg/footer/original-products.svg"
-                             alt="original-products"
-                             src="../assets/images/svg/footer/original-products.svg">
-                    </div>
-                    <p class="text-caption color-700">Original Products</p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="col-md-2">
-                    <div class="footer-img-square-56">
-                        <img class="support-img"
-                             data-src="../assets/images/svg/footer/support.svg"
-                             alt="support"
-                             src="../assets/images/svg/footer/support.svg">
-                    </div>
-                    <p class="text-caption color-700">24-7 Support</p>
-                </div>
+                <p class="text-caption color-700">Express Delivery</p>
             </div>
         </div>
-        <p class="simple-footer">Baloot @ UT</p>
-    </footer>
-</div>
+        <div class="col">
+            <div class="col-md-2">
+                <div class="footer-img-square-56">
+                    <img class="cash-on-delivery-img"
+                         data-src="../assets/images/svg/footer/cash-on-delivery.svg"
+                         alt="cash-on-delivery"
+                         src="../assets/images/svg/footer/cash-on-delivery.svg">
+                </div>
+                <p class="text-caption color-700">Cash On Delivery</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col-md-2">
+                <div class="footer-img-square-56">
+                    <img class="days-return-img"
+                         data-src="../assets/images/svg/footer/days-return.svg"
+                         alt="days-return"
+                         src="../assets/images/svg/footer/days-return.svg">
+                </div>
+                <p class="text-caption color-700">Days Return</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col-md-2">
+                <div class="footer-img-square-56">
+                    <img class="original-products-img"
+                         data-src="../assets/images/svg/footer/original-products.svg"
+                         alt="original-products"
+                         src="../assets/images/svg/footer/original-products.svg">
+                </div>
+                <p class="text-caption color-700">Original Products</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col-md-2">
+                <div class="footer-img-square-56">
+                    <img class="support-img"
+                         data-src="../assets/images/svg/footer/support.svg"
+                         alt="support"
+                         src="../assets/images/svg/footer/support.svg">
+                </div>
+                <p class="text-caption color-700">24-7 Support</p>
+            </div>
+        </div>
+    </div>
+    <p class="simple-footer">Baloot @ UT</p>
+</footer>
 </body>
 </html>

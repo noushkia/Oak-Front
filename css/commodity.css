@@ -1,6 +1,6 @@
-@import "navbar.css";
-@import "card.css";
-@import "footer.css";
+@import "general/navbar.css";
+@import "utils/card.css";
+@import "general/footer.css";
 
 .container.commodity {
     margin-top: 2%;
