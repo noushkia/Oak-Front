@@ -8,8 +8,37 @@ html, body {
     margin-bottom: -50px; /* height of the footer */
 }
 
+.container {
+    margin-top: 2%;
+    margin-bottom: 4%;
+}
+
 button, input, form, .btn, .filter {
-    border-radius: 15px;
+    border-radius: 12px;
+}
+
+.btn-group {
+    width: 50%;
+    height: 10%;
+}
+
+.btn-group button:not(:last-child) {
+    border-right: none;
+}
+
+.btn-group button:disabled {
+    opacity: 1;
+    background: #FFFFFF;
+    border-top: 1px solid #593C1C;
+    border-bottom: 1px solid #593C1C;
+    border-right: none;
+    border-left: none;
+
+    color: #593C1C;
+}
+
+.btn-group button:not(:first-child) {
+    border-left: none;
 }
 
 .bg-lightbrown {

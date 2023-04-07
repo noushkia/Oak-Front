@@ -36,28 +36,6 @@
     color: #593C1C;
 }
 
-.card .btn-group {
-    width: 50%;
-    height: 10%;
-}
-
-.card .btn-group button:not(:last-child) {
-    border-right: none;
-}
-
-.card .btn-group button:disabled {
-    opacity: 1;
-    background: #FFFFFF;
-    border-top: 1px solid #593C1C;
-    border-bottom: 1px solid #593C1C;
-
-    color: #593C1C;
-}
-
-.card .btn-group button:not(:first-child) {
-    border-left: none;
-}
-
 .card .add {
     border-color: #333;
 }

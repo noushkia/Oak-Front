@@ -33,6 +33,13 @@
 /* Show the dropdown content when the dropdown button is clicked */
 .dropdown:hover .dropdown-content {
     display: block;
+    width: 100px;
+    background-color: #D8C1A8;
+    color: #593C1C;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
 }
 
 /* Style the links inside the dropdown */
@@ -45,5 +52,8 @@
 
 /* Change the background color of the links on hover */
 .dropdown-content a:hover {
-    background-color: #F7F0E9;
+    background-color: #593C1C;
+    color: #D8C1A8;
+    border: none;
+    border-radius: 12px;
 }

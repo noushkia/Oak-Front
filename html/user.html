@@ -29,165 +29,133 @@
     <div class="container user d-flex">
         <div class="col-lg-6 col-md-12">
             <div class="row">
-                <div class="col-md-1">
-                    <img src="../assets/images/svg/user/user.svg" alt="user">
-                </div>
-                <div class="col-md-11">
-                    <p>Kianoush</p>
-                </div>
+                <img src="../assets/images/svg/user/user.svg" alt="user">
+                <p>&nbsp; Kianoush</p>
             </div>
             <div class="row">
-                <div class="col-md-1">
-                    <img src="../assets/images/svg/user/mail.svg" alt="user">
-                </div>
-                <div class="col-md-11">
-                    <p>kianoosharshi@gmail.com</p>
-                </div>
+                <img src="../assets/images/svg/user/mail.svg" alt="user">
+                <p>&nbsp; kianoosharshi@gmail.com</p>
             </div>
             <div class="row">
-                <div class="col-md-1">
-                    <img src="../assets/images/svg/user/calendar.svg" alt="user">
-                </div>
-                <div class="col-md-11">
-                    <p>1972/12/12</p>
-                </div>
+                <img src="../assets/images/svg/user/calendar.svg" alt="user">
+                <p>&nbsp; 1972/12/12</p>
             </div>
             <div class="row">
-                <div class="col-md-1">
-                    <img src="../assets/images/svg/user/location.svg" alt="user">
-                </div>
-                <div class="col-md-11">
-                    <p>2078 Dardasht Tehran Kabol</p>
-                </div>
+                <img src="../assets/images/svg/user/location.svg" alt="user">
+                <p>&nbsp; 2078 Dardasht Tehran Kabol</p>
             </div>
         </div>
 
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-6 col-md-12 credit">
             <div class="row">
-                <p class="credit">$10000000</p>
+                <p class="amount">$10000000</p>
             </div>
             <div class="row">
-                <label for="add-amount">
-                    <input type="text" id="add-amount" placeholder="$Amount" style="text-align: center;">
-                </label>
+                <input type="text" id="add-amount" placeholder="$Amount">
             </div>
-            <div class="row">
-                <button class="btn btn-dark">Add More Credit</button>
+            <div class="row mt-2">
+                <button class="btn">Add More Credit</button>
             </div>
         </div>
     </div>
 
     <div class="container cart" id="cart">
-        <div class="row d-flex">
-            <div class="col">
-                <img src="../assets/images/svg/user/cart.svg" alt="cart">
-                <b>Cart</b>
-            </div>
+        <div class="row title align-items-center">
+            <img src="../assets/images/svg/user/cart.svg" alt="cart">
+            <span>&nbsp; Cart</span>
         </div>
+
         <div class="row">
-            <div class="col">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Categories</th>
-                        <th>Price</th>
-                        <th>Provider ID</th>
-                        <th>Rating</th>
-                        <th>In Stock</th>
-                        <th>In Cart</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity"
-                                 style="width: 100px; height: auto;">
-                        </td>
-                        <td>Taha</td>
-                        <td>Slave</td>
-                        <td>$300</td>
-                        <td>14</td>
-                        <td>9.9</td>
-                        <td>5</td>
-                        <td>
-                            <div class="d-flex justify-content-end inp">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary minus-btn" type="button">-</button>
-                                    </div>
-                                    <div class="input-group-text px-3">1</div>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary plus-btn" type="button">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="table table-hover">
+                <thead class="table-head">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Categories</th>
+                    <th>Price</th>
+                    <th>Provider ID</th>
+                    <th>Rating</th>
+                    <th>In Stock</th>
+                    <th>In Cart</th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                <tr>
+                    <td>
+                        <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity">
+                    </td>
+                    <td>Taha</td>
+                    <td>Slave</td>
+                    <td>$300</td>
+                    <td>14</td>
+                    <td class="rating">9.9</td>
+                    <td class="in_stock">5</td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn" type="button">-</button>
+                            <button class="btn" type="button" disabled>1</button>
+                            <button class="btn" type="button">+</button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+
         <div class="row d-flex justify-content-center">
             <div class="col text-center">
-                <button class="btn btn-dark">Pay now!</button>
+                <button class="btn pay">Pay now!</button>
             </div>
         </div>
     </div>
 
     <div class="container history" id="history">
-        <div class="row d-flex">
-            <div class="col">
-                <img src="../assets/images/svg/user/history.svg" alt="history">
-                <b>History</b>
-            </div>
+        <div class="row title align-items-center">
+            <img src="../assets/images/svg/user/history.svg" alt="history">
+            <span>&nbsp; History</span>
         </div>
+
         <div class="row">
-            <div class="col">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Categories</th>
-                        <th>Price</th>
-                        <th>Provider ID</th>
-                        <th>Rating</th>
-                        <th>In Stock</th>
-                        <th>Quantity</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity"
-                                 style="width: 100px; height: auto;">
-                        </td>
-                        <td>Taha</td>
-                        <td>Slave</td>
-                        <td>$300</td>
-                        <td>14</td>
-                        <td>9.9</td>
-                        <td>0</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity"
-                                 style="width: 100px; height: auto;">
-                        </td>
-                        <td>Taha</td>
-                        <td>Slave</td>
-                        <td>$300</td>
-                        <td>14</td>
-                        <td>9.9</td>
-                        <td>0</td>
-                        <td>3</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="table table-hover">
+                <thead class="table-head">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Categories</th>
+                    <th>Price</th>
+                    <th>Provider ID</th>
+                    <th>Rating</th>
+                    <th>In Stock</th>
+                    <th>Quantity</th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                <tr>
+                    <td>
+                        <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity">
+                    </td>
+                    <td>Taha</td>
+                    <td>Slave</td>
+                    <td>$300</td>
+                    <td>14</td>
+                    <td class="rating">9.9</td>
+                    <td class="in_stock">5</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="../assets/images/svg/commodity/taha.jpg" alt="commodity">
+                    </td>
+                    <td>Taha</td>
+                    <td>Slave</td>
+                    <td>$300</td>
+                    <td>14</td>
+                    <td class="rating">9.9</td>
+                    <td class="in_stock">5</td>
+                    <td>2</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 

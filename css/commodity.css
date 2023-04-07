@@ -2,11 +2,6 @@
 @import "utils/card.css";
 @import "general/footer.css";
 
-.container.commodity {
-    margin-top: 2%;
-    margin-bottom: 4%;
-}
-
 .commodity {
     font-family: Inter, cursive;
     font-style: normal;
@@ -171,11 +166,6 @@
 .commodity .comment .new-comment {
     background: #F5F5F5;
     border-radius: 10px;
-}
-
-.container.suggestions {
-    margin-top: 2%;
-    margin-bottom: 4%;
 }
 
 .suggestions {
