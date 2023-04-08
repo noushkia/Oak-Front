@@ -85,9 +85,7 @@ input:checked + .slider:before {
     background-color: #D8C1A8;
 }
 
-.filter button.btn:focus, button.btn:active {
+.filter button.btn:focus, button.btn:checked, button.btn:active {
     color: white;
     background-color: #A97B47;
 }
-
-/*todo keep the focus on selected button until the other one is selected?   */
