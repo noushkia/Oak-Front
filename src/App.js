@@ -11,12 +11,6 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const routes = (
-        <Routes>
-            <Route path='/auth' element={<Auth setLoggedIn={setLoggedIn} setUser={setUser}/>}/>
-        </Routes>
-    )
-
     const protectedRoutes = (
         <Routes>
             {/* Add the protected routes here */}
@@ -25,8 +19,9 @@ function App() {
 
     return (
         <Router>
-            {loading ? <div className='text-center'><Spinner animation="border" variant='info'/></div> :
-                loggedIn ? protectedRoutes : routes
+            {
+                loading ? <div className='text-center'><Spinner animation="border" variant='info'/></div> :
+                    loggedIn ? protectedRoutes : <Auth setLoggedIn={setLoggedIn} setUser={setUser}/>
             }
             <ToastContainer position='bottom-right' rtl={true}/>
         </Router>
