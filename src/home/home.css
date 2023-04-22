@@ -1,6 +1,6 @@
 @import "general/navbar.css";
-@import "../utils/filter.css";
-@import "../utils/card.css";
+@import "filter.css";
+@import "../commodity/card.css";
 @import "general/footer.css";
 
 .container.home {

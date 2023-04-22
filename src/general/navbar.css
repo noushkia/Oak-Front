@@ -1,6 +1,6 @@
 /*todo: move imports to top level (home page)*/
-@import "../utils/dropdown.css";
-@import "../utils/searchbar.css";
+@import "../home/dropdown.css";
+@import "../home/searchbar.css";
 
 .navbar {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
