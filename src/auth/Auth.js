@@ -35,7 +35,7 @@ function Auth(props) {
                                 <div className="card-3d-wrap mx-auto">
                                     <div className="card-3d-wrapper">
                                         {isLogin ? <Login setLoggedIn={props.setLoggedIn} setUser={props.setUser}/> :
-                                            <SignUp/>}
+                                            <SignUp setLoggedIn={props.setLoggedIn} setUser={props.setUser}/>}
                                     </div>
                                 </div>
                             </div>

@@ -1,15 +1,56 @@
-// todo: Should we collect the data and add new user?
 import '../auth.css';
 
-import {Fragment, useEffect} from "react";
+import {Fragment, useEffect, useState} from "react";
+import {signUpUser} from "../../utils/api/Users";
+import {saveUsername} from "../../utils/Session";
+import {toast} from "react-toastify";
+import {Spinner} from "react-bootstrap";
 
 
-function SignUp() {
+function SignUp(props) {
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [birthDate, setBirthDate] = useState("");
+    const [address, setAddress] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         document.title = 'signup';
-        return () => {}; // cleanup function
+        return () => {
+        }; // cleanup function
     }, []);
+
+    function signUp(e) {
+        e.preventDefault();
+        setLoading(true);
+        const formData = {
+            username,
+            email,
+            password,
+            birthDate,
+            address,
+        };
+        signUpUser(formData)
+            .then(user => {
+                props.setUser(user);
+                saveUsername(username);
+                props.setLoggedIn(true);
+                console.log('SignUp: success!');
+            })
+            .catch(error => {
+                    if (error.response) {
+                        console.log(error.response.data);
+                        toast.error(error.response.data.error);
+                    } else {
+                        console.log(error);
+                        console.log('SignUp: server down?');
+                        toast.error('Server not responding');
+                    }
+                    setLoading(false);
+                }
+            );
+    }
 
     return (
         <Fragment>
@@ -18,32 +59,36 @@ function SignUp() {
                     <div className="section text-center">
                         <h4 className="mb-4 pb-3">Sign Up</h4>
                         <div className="form-group">
-                            <input required={true} type="text" name="logname" className="form-style"
-                                   placeholder="Your Username" id="logname"/>
+                            <input required={true} type="text" name="username" className="form-style"
+                                   placeholder="Your Username" id="logname"
+                                   onChange={e => setUsername(e.target.value)}/>
                             <img className="input-icon" src="/assets/images/svg/user/user.svg" alt=""/>
                         </div>
                         <div className="form-group mt-2">
-                            <input required={true} type="email" name="logemail" className="form-style"
-                                   placeholder="Your Email" id="logemail"/>
+                            <input required={true} type="email" name="email" className="form-style"
+                                   placeholder="Your Email" id="logemail" onChange={e => setEmail(e.target.value)}/>
                             <img className="input-icon" src="/assets/images/svg/user/mail.svg" alt=""/>
                         </div>
                         <div className="form-group mt-2">
-                            <input required={true} type="password" name="logpass" className="form-style"
-                                   placeholder="Your Password" id="logpass"/>
+                            <input required={true} type="password" name="password" className="form-style"
+                                   placeholder="Your Password" id="logpass"
+                                   onChange={e => setPassword(e.target.value)}/>
                             <img className="input-icon" src="/assets/images/svg/user/lock.svg" alt=""/>
                         </div>
                         <div className="form-group mt-2">
-                            <input required={true} type="date" name="logdate" className="form-style"
-                                   placeholder="Your Birth Date" id="logdate"/>
+                            <input required={true} type="date" name="birthDate" className="form-style"
+                                   placeholder="Your Birth Date" id="logdate"
+                                   onChange={e => setBirthDate(e.target.value)}/>
                             <img className="input-icon" src="/assets/images/svg/user/calendar.svg" alt=""/>
                         </div>
                         <div className="form-group mt-2">
-                            <input required={true} type="text" name="logaddress" className="form-style"
-                                   placeholder="Your Birth Date" id="logaddress"/>
+                            <input required={true} type="text" name="address" className="form-style"
+                                   placeholder="Your Birth Date" id="logaddress"
+                                   onChange={e => setAddress(e.target.value)}/>
                             <img className="input-icon" src="/assets/images/svg/user/location.svg" alt=""/>
                         </div>
-                        <button type="submit" className="btn mt-4">
-                            Sign Up
+                        <button type="submit" className="btn mt-4" onClick={e => signUp(e)}>
+                            {loading ? <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'signup'}
                         </button>
                     </div>
                 </div>
