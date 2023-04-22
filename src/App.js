@@ -1,37 +1,35 @@
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {useState} from "react";
-import {Route, Routes} from 'react-router-dom';
-import Login from './auth/login/Login';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {ToastContainer} from "react-toastify";
 import {Spinner} from "react-bootstrap";
+import {useState} from "react";
+import Auth from "./auth/Auth";
 
 function App() {
-    const [user, setUser] = useState({}); // todo: implement
+    const [user, setUser] = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const loggedOutRoutes = (
+    const routes = (
         <Routes>
-            <Route path='/login' children={<Login/>}/>
+            <Route path='/auth' element={<Auth setLoggedIn={setLoggedIn} setUser={setUser}/>}/>
         </Routes>
     )
 
-    const routes = (
+    const protectedRoutes = (
         <Routes>
+            {/* Add the protected routes here */}
         </Routes>
     )
 
     return (
-        <div className="App">
-            <div className="wrapper">
-                {loading ? <div className='text-center'> <Spinner animation="border" variant='info' /> </div> :
-                    loggedIn ? routes : loggedOutRoutes
-                }
-            </div>
-            <ToastContainer position='bottom-right' rtl={true} />
-        </div>
+        <Router>
+            {loading ? <div className='text-center'><Spinner animation="border" variant='info'/></div> :
+                loggedIn ? protectedRoutes : routes
+            }
+            <ToastContainer position='bottom-right' rtl={true}/>
+        </Router>
     );
 }
 

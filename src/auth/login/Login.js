@@ -1,13 +1,18 @@
+import '../auth.css';
+
 import {Fragment, useEffect, useState} from "react";
 import {Spinner} from "react-bootstrap";
 import {toast} from "react-toastify";
-import '../auth.css';
-
+import {getUser} from "../../utils/api/Users";
+import {saveUsername} from "../../utils/Session";
 
 function Login(props) {
     const [username, setUsername] = useState('');
     const [loading, setLoading] = useState(false);
-    useEffect(() => document.title = 'login', []);
+    useEffect(() => {
+        document.title = 'login';
+        return () => {}; // cleanup function
+    }, []);
 
     function submitName(e) {
         e.preventDefault();
@@ -23,7 +28,7 @@ function Login(props) {
             }).catch(error => {
             if (error.response) {
                 console.log(error.response.data);
-                toast.error(error.response.data.error);
+                toast.error(error.response.data.error); // todo: check
             } else {
                 console.log('Login: server down?');
                 toast.error('Server not responding');
