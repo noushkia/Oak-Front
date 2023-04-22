@@ -1,25 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import {useState} from "react";
+import {Route, Routes} from 'react-router-dom';
+import Login from './auth/login/Login';
+import {ToastContainer} from "react-toastify";
+import {Spinner} from "react-bootstrap";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [user, setUser] = useState({}); // todo: implement
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const loggedOutRoutes = (
+        <Routes>
+            <Route path='/login' children={<Login/>}/>
+        </Routes>
+    )
+
+    const routes = (
+        <Routes>
+        </Routes>
+    )
+
+    return (
+        <div className="App">
+            <div className="wrapper">
+                {loading ? <div className='text-center'> <Spinner animation="border" variant='info' /> </div> :
+                    loggedIn ? routes : loggedOutRoutes
+                }
+            </div>
+            <ToastContainer position='bottom-right' rtl={true} />
+        </div>
+    );
 }
 
 export default App;
