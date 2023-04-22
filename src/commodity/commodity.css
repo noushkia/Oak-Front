@@ -1,5 +1,5 @@
 @import "general/navbar.css";
-@import "utils/card.css";
+@import "../utils/card.css";
 @import "general/footer.css";
 
 .commodity {
