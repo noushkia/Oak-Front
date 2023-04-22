@@ -3,23 +3,25 @@ import '../auth.css';
 import {Fragment, useEffect, useState} from "react";
 import {Spinner} from "react-bootstrap";
 import {toast} from "react-toastify";
-import {getUser} from "../../utils/api/Users";
+import {loginUser} from "../../utils/api/Users";
 import {saveUsername} from "../../utils/Session";
 
 function Login(props) {
     const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         document.title = 'login';
-        return () => {}; // cleanup function
+        return () => {
+        }; // cleanup function
     }, []);
 
-    function submitName(e) {
+    function login(e) {
         e.preventDefault();
-        if (!username)
+        if (!username || !password)
             return;
         setLoading(true);
-        getUser(username)
+        loginUser(username, password)
             .then(user => {
                 props.setUser(user);
                 saveUsername(username);
@@ -28,7 +30,7 @@ function Login(props) {
             }).catch(error => {
             if (error.response) {
                 console.log(error.response.data);
-                toast.error(error.response.data.error); // todo: check
+                toast.error(error.response.data.error);
             } else {
                 console.log('Login: server down?');
                 toast.error('Server not responding');
@@ -50,11 +52,12 @@ function Login(props) {
                             <img className="input-icon" src="/assets/images/svg/user/user.svg" alt=""/>
                         </div>
                         <div className="form-group mt-2">
-                            <input type="password" name="logpass" className="form-style"
-                                   placeholder="Your Password" id="logpass"/>
+                            <input required={true} onChange={e => setPassword(e.target.value)}
+                                   type="password" name="logpass" className="form-style" placeholder="Your Password"
+                                   id="logpass"/>
                             <img className="input-icon" src="/assets/images/svg/user/lock.svg" alt=""/>
                         </div>
-                        <button onClick={e => submitName(e)} type="submit"
+                        <button onClick={e => login(e)} type="submit"
                                 className="btn mt-4">
                             {loading ? <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'login'}
                         </button>
