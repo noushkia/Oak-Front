@@ -5,6 +5,7 @@ import {ToastContainer} from "react-toastify";
 import {Spinner} from "react-bootstrap";
 import {useState} from "react";
 import Auth from "./auth/Auth";
+import NavBar from "./general/navbar/NavBar";
 
 function App() {
     const [user, setUser] = useState({});
@@ -19,6 +20,7 @@ function App() {
 
     return (
         <Router>
+            <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
             {
                 loading ? <div className='text-center'><Spinner animation="border" variant='info'/></div> :
                     loggedIn ? protectedRoutes : <Auth setLoggedIn={setLoggedIn} setUser={setUser}/>
