@@ -1,6 +1,4 @@
-@import "general/navbar.css";
 @import "card.css";
-@import "general/footer.css";
 
 .commodity {
     font-family: Inter, cursive;

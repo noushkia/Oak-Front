@@ -37,3 +37,9 @@ export async function addDiscount(code){
     // const response = await axios.post('http://localhost:8080/api/users/' );
     // return response.data;
 }
+
+export async function addToBuyList(commodityId){
+    // todo implement api
+    // const response = await axios.post('http://localhost:8080/api/users/' );
+    // return response.data;
+}

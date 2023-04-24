@@ -3,7 +3,7 @@ import {Button, Modal} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import {removeUsername} from "../utils/Session";
 
-function LogoutDialog(props) {
+function LogoutModal(props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -40,4 +40,4 @@ function LogoutDialog(props) {
     );
 }
 
-export default LogoutDialog;
+export default LogoutModal;
