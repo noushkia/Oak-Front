@@ -7,7 +7,7 @@ function LogoutDialog(props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = (event) => {
+    const handleOpen = (event) => {
         event.preventDefault();
         setShow(true);
     };
@@ -18,8 +18,10 @@ function LogoutDialog(props) {
         props.setLoggedIn(false);
     };
 
-    return (<>
-            <Link onClick={handleShow} to='#'>Exit<i className="flaticon-log-out"></i></Link>
+    return (
+        <>
+            {/*todo: <i className="flaticon-log-out"></i>*/}
+            <Link onClick={handleOpen} to='#'>Exit<i className="flaticon-log-out"></i></Link>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header>
@@ -34,7 +36,8 @@ function LogoutDialog(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </>);
+        </>
+    );
 }
 
 export default LogoutDialog;
