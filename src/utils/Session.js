@@ -5,3 +5,7 @@ export function getUsername() {
 export function saveUsername(username) {
     localStorage.setItem('username', username);
 }
+
+export function removeUsername() {
+    localStorage.removeItem('username');
+}
