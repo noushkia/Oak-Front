@@ -1,13 +1,11 @@
 import "./commodity.css"
-import {Fragment, useEffect} from "react";
+import { Fragment, useEffect } from "react";
 import CommodityModal from "./CategoriesModal";
-import React, {useState} from 'react';
-import {toast} from "react-toastify";
-import {addComment, addUserRating} from "../utils/api/Commodities";
-import {useHistory} from 'react-router-dom';
-import {addToBuyList} from "../utils/api/Users";
-
-//todo: update react
+import React, { useState } from 'react';
+import { toast} from "react-toastify";
+import { addComment, addUserRating } from "../utils/api/Commodities";
+import { useNavigate } from "react-router-dom";
+import { addToBuyList } from "../utils/api/Users";
 
 function Rate() {
     const [rating, setRating] = useState(null);
@@ -218,7 +216,7 @@ function CommentSection(props) {
 }
 
 function Suggestions(props) {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleAddToCart = (commodityId) => {
         addToBuyList(commodityId)
@@ -236,7 +234,7 @@ function Suggestions(props) {
     };
 
     const handleCardClick = (commodityId) => {
-        history.push(`/commodities/${commodityId}`);
+        navigate(`/commodities/${commodityId}`);
     };
 
     return (
