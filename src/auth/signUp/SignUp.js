@@ -33,8 +33,7 @@ function SignUp(props) {
         };
         signUpUser(formData)
             .then(user => {
-                props.setUser(user);
-                saveUsername(username);
+                props.setUsername(username);
                 props.setLoggedIn(true);
                 console.log('SignUp: success!');
             })

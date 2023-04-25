@@ -1,36 +1,35 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {toast, ToastContainer} from "react-toastify";
-import {Spinner} from "react-bootstrap";
-import {useEffect, useState} from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { toast, ToastContainer } from "react-toastify";
+import { Spinner } from "react-bootstrap";
+import { Fragment, useEffect, useState } from "react";
 import Auth from "./auth/Auth";
 import NavBar from "./general/navbar/NavBar";
 import Footer from "./general/footer/Footer";
 import User from "./user/User";
-import {getUsername} from "./utils/Session";
-import {getUser} from "./utils/api/Users";
+import { getUser } from "./utils/api/Users";
 
 function App() {
     const [user, setUser] = useState({});
-    const [cart, setCart] = useState({}); // Use cart to show the number of items in cart in the buttons
+    const [username, setUsername] = useState("");
     const [loggedIn, setLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const protectedRoutes = (
         <Routes>
-            <Route path='/user' children={<User user={user}/>}/>
+            <Route path='/user' element={<User user={user}/>}/>
         </Routes>
     )
 
     useEffect(() => {
-        if (getUsername() != null) {
+        if (username !== "") {
+            console.log(username)
             setLoggedIn(true);
             setLoading(true);
-            getUser(getUsername())
+            getUser(username)
                 .then(currUser => {
                     setUser(currUser);
-                    // todo: setCart();
                     setLoggedIn(true);
                     setLoading(false);
                 })
@@ -46,13 +45,18 @@ function App() {
     return (
         <Router>
             <div className="wrapper">
-                <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
                 {
-                    loading ? <div className='text-center'><Spinner animation="border" variant='info'/></div> :
-                        loggedIn ? protectedRoutes : <Auth setLoggedIn={setLoggedIn} setUser={setUser}/>
+                    loading ?
+                        <div className='text-center'><Spinner animation="border" variant='info'/></div>
+                        : loggedIn ?
+                            <Fragment>
+                                <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+                                protectedRoutes
+                                <Footer/>
+                            </Fragment>
+                            : <Auth setLoggedIn={setLoggedIn} setUsername={setUsername}/>
                 }
                 <ToastContainer position='bottom-right' rtl={true}/>
-                <Footer/>
             </div>
         </Router>
     );

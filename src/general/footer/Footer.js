@@ -1,10 +1,10 @@
 import React from 'react';
 import "./footer.css"
-import expressDeliveryImg from "/assets/images/svg/footer/express-delivery.svg";
-import cashOnDeliveryImg from "/assets/images/svg/footer/cash-on-delivery.svg";
-import daysReturnImg from "/assets/images/svg/footer/days-return.svg";
-import originalProductsImg from "/assets/images/svg/footer/original-products.svg";
-import supportImg from "../../../";
+import expressDeliveryImg from "../../assets/images/svg/footer/express-delivery.svg";
+import cashOnDeliveryImg from "../../assets/images/svg/footer/cash-on-delivery.svg";
+import daysReturnImg from "../../assets/images/svg/footer/days-return.svg";
+import originalProductsImg from "../../assets/images/svg/footer/original-products.svg";
+import supportImg from "../../assets/images/svg/footer/original-products.svg";
 
 function Footer() {
     const footerItems = [
@@ -37,20 +37,22 @@ function Footer() {
 
     return (
         <footer>
-            <section className="footer-items">
+            <div className="row">
                 {footerItems.map((item, index) => (
-                    <article key={index} className="footer-item">
-                        <div className="footer-img-square-56">
-                            <img
-                                className={`${item.alt}-img`}
-                                data-src={item.icon}
-                                alt={item.alt}
-                            />
+                    <div className="col">
+                        <div className="col-md-2">
+                            <div className="footer-img-square-56">
+                                <img
+                                    className={`${item.alt}-img`}
+                                    src={item.icon}
+                                    alt={item.alt}
+                                />
+                            </div>
+                            <p className="text-caption color-700">{item.title}</p>
                         </div>
-                        <p className="text-caption color-700">{item.title}</p>
-                    </article>
+                    </div>
                 ))}
-            </section>
+            </div>
             <p className="simple-footer">Baloot @ UT</p>
         </footer>
     );

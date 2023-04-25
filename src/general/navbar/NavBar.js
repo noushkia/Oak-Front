@@ -21,7 +21,7 @@ function HomeBar(props) {
             </div>
             <input className="search-input" type="search" placeholder="search your product..." aria-label="Search"/>
             <button className="btn btn-outline-success my-2 my-sm-0 search" type="submit"></button>
-            <img className="search" src="../../../public/assets/images/svg/header/search.svg" alt="Search"
+            <img className="search" src="../../public/assets/images/svg/header/search.svg" alt="Search"
                  onClick="document.querySelector('.form-inline button[id=search]').click();"/>
         </form>
     )

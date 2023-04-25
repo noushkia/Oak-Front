@@ -34,19 +34,19 @@ function Profile(props) {
       <div className="row d-flex">
         <div className="col-lg-6 col-md-12">
           <div className="row">
-            <img src="../../public/assets/images/svg/user/user.svg" alt="user" />
+            <img src="../public/assets/images/svg/user/user.svg" alt="user" />
             <p>{props.user.username}</p>
           </div>
           <div className="row">
-            <img src="../../public/assets/images/svg/user/mail.svg" alt="mail" />
+            <img src="../public/assets/images/svg/user/mail.svg" alt="mail" />
             <p>{props.user.email}</p>
           </div>
           <div className="row">
-            <img src="../../public/assets/images/svg/user/calendar.svg" alt="calendar" />
+            <img src="../public/assets/images/svg/user/calendar.svg" alt="calendar" />
             <p>{props.user.birthDate}</p>
           </div>
           <div className="row">
-            <img src="../../public/assets/images/svg/user/location.svg" alt="location" />
+            <img src="../public/assets/images/svg/user/location.svg" alt="location" />
             <p>{props.user.address}</p>
           </div>
         </div>
@@ -111,7 +111,7 @@ function Cart(props) {
         <Fragment>
             <div className="container cart" id="cart">
                 <div className="row title align-items-center">
-                    <img src="../../public/assets/images/svg/user/cart.svg" alt="cart"/>
+                    <img src="../public/assets/images/svg/user/cart.svg" alt="cart"/>
                     <span>&nbsp; Cart</span>
                 </div>
 
@@ -148,7 +148,7 @@ function History(props) {
         <Fragment>
             <div className="container history" id="history">
                 <div className="row title align-items-center">
-                    <img src="../../public/assets/images/svg/user/history.svg" alt="history"/>
+                    <img src="../public/assets/images/svg/user/history.svg" alt="history"/>
                     <span>&nbsp; History</span>
                 </div>
 

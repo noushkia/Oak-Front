@@ -26,8 +26,7 @@ function Login(props) {
         setLoading(true);
         loginUser(formData)
             .then(user => {
-                props.setUser(user);
-                saveUsername(username);
+                props.setUsername(username);
                 props.setLoggedIn(true);
                 console.log('Login: success!');
             }).catch(error => {

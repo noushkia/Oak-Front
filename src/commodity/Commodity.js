@@ -21,7 +21,7 @@ function Rate() {
             stars.push(
                 <img
                     key={i}
-                    src="../../public/assets/images/svg/commodity/star.svg"
+                    src="../assets/images/svg/commodity/star.svg"
                     alt="star"
                     className={`star ${filled ? 'filled' : ''}`}
                     onClick={() => handleRatingClick(i)}
@@ -105,7 +105,7 @@ function CommodityInfo(props) {
                     <div className="row justify-content-between">
                         <p className="in_stock align-self-center">{props.commodity.inStock} left in stock</p>
                         <div className="d-flex align-self-center align-items-center justify-content-end rating">
-                            <img className="star" src="../../public/assets/images/svg/commodity/star.svg" alt="Star"/>
+                            <img className="star" src="../assets/images/svg/commodity/star.svg" alt="Star"/>
                             <p className="mb-0 ml-2 text">
                                 <span>{props.commodity.rating}</span>
                                 <span>({props.commodity.count})</span> todo: get the number of ratings
@@ -162,13 +162,13 @@ function CommentSection(props) {
                     <p>
                         &nbsp;&nbsp; {comment.likes}{' '}
                         <img
-                            src="../../public/assets/images/svg/commodity/like.svg"
+                            src="../assets/images/svg/commodity/like.svg"
                             alt="like"
                         />{' '}
                         &nbsp;&nbsp;
                         {comment.dislikes}{' '}
                         <img
-                            src="../../public/assets/images/svg/commodity/dislike.svg"
+                            src="../assets/images/svg/commodity/dislike.svg"
                             alt="dislike"
                         />
                     </p>
