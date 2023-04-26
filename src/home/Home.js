@@ -1,77 +1,80 @@
-import React from "react";
+import React, {Fragment, useState} from "react";
 import "./home.css";
+import Card from "../general/card/Card";
+import {getInCart} from "../utils/Cart";
+import {getCommodities} from "../utils/api/Commodities";
 
-function Commodity({ title, stock, image, price }) {
-    return (
-        <div className="col-lg-3 col-md-6 col-sm-12 card mx-2">
-            <h2 className="card-title">{title}</h2>
-            <h6 className="in_stock">{stock} left in stock</h6>
-            <img className="card-img-top image" src={image} alt="Card image cap" />
-            <div className="card-body d-flex justify-content-between">
-                <p className="card-text price">{price}</p>
-                <button className="btn" type="button">
-                    add to cart
-                </button>
-            </div>
-        </div>
-    );
-}
 
-function CommodityWithQuantity({ title, stock, image, price }) {
+function FilterBar(props) {
+    const [showAvailableCommodities, setShowAvailableCommodities] = useState(false);
+    const [sortingAttribute, setSortingAttribute] = useState("");
+    const handleFilterToggle = () => {
+        props.setShowAvailableCommodities(!showAvailableCommodities);
+        setShowAvailableCommodities(!showAvailableCommodities);
+    };
+
+    const handleSortBy = (attribute) => {
+        props.setSortingAttribute(attribute);
+        setSortingAttribute(attribute);
+    };
+
     return (
-        <div className="col-lg-3 col-md-6 col-sm-12 card mx-2">
-            <h2 className="card-title">{title}</h2>
-            <h6 className="in_stock">{stock} left in stock</h6>
-            <img className="card-img-top image" src={image} alt="Card image cap" />
-            <div className="card-body d-flex justify-content-between">
-                <p className="card-text price">{price}</p>
-                <div className="btn-group">
-                    <button className="btn" type="button">
-                        -
-                    </button>
-                    <button className="btn" type="button" disabled>
-                        1
-                    </button>
-                    <button className="btn" type="button">
-                        +
-                    </button>
+        <div className="row justify-content-center">
+            <div className="col-lg-8 col-md-10 col-sm-12">
+                <div className="bg-lightbrown filter">
+                    <div className="row">
+                        <div className="col-6 d-flex align-items-center">
+                            <p className="m-0">Available commodities</p>
+                            <label className="switch ml-4">
+                                <input type="checkbox" onChange={handleFilterToggle}
+                                       checked={showAvailableCommodities}/>
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
+                        <div className="col-6 d-flex align-items-center justify-content-end">
+                            <p className="mr-2 mt-3">sort by:</p>
+                            <button type="button" className={`btn ${sortingAttribute === 'name' ? 'active' : ''}`}
+                                    onClick={() => handleSortBy('name')}>
+                                name
+                            </button>
+                            <button type="button" className={`btn ${sortingAttribute === 'price' ? 'active' : ''}`}
+                                    onClick={() => handleSortBy('price')}>
+                                price
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
 
-function CommodityList() {
+
+function Commodities(props) {
     return (
-        <div className="container home">
-            <div className="row my-4 no-gutters no-wrap-row justify-content-center">
-                <Commodity
-                    title="Taha"
-                    stock={2}
-                    image="../../public/assets/images/svg/commodity/taha.jpg"
-                    price="300$"
-                />
-                <Commodity
-                    title="Taha"
-                    stock={2}
-                    image="../../public/assets/images/svg/commodity/taha.jpg"
-                    price="300$"
-                    disabled
-                />
-                <Commodity
-                    title="Taha"
-                    stock={2}
-                    image="../../public/assets/images/svg/commodity/taha.jpg"
-                    price="300$"
-                />
-                <CommodityWithQuantity
-                    title="Taha"
-                    stock={2}
-                    image="../../public/assets/images/svg/commodity/taha.jpg"
-                    price="300$"
-                    disabled
-                />
+        <Fragment>
+            <div className="container home">
+                <div className="row my-4 no-gutters no-wrap-row justify-content-center">
+                    {props.commodities.map((commodity, index) => (
+                        <Card card={commodity} index={index} inCart={getInCart(commodity.id)}/>
+                    ))}
+                </div>
             </div>
-        </div>
+        </Fragment>
     )
 }
+
+function Home(props) {
+    const [showAvailableCommodities, setShowAvailableCommodities] = useState(false);
+    const [sortingAttribute, setSortingAttribute] = useState("");
+
+    return (
+        <Fragment>
+            <FilterBar setShowAvailableCommodities={setShowAvailableCommodities}
+                       setSortingAttribute={setSortingAttribute}/>
+            <Commodities commodities={getCommodities(showAvailableCommodities, sortingAttribute, props.searchQuery)}/>
+        </Fragment>
+    )
+}
+
+export default Home;

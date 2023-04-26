@@ -1,7 +1,4 @@
-@import "general/navbar.css";
 @import "filter.css";
-@import "../commodity/card.css";
-@import "general/footer.css";
 
 .container.home {
     margin-top: 2%;
