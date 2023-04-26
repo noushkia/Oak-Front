@@ -3,6 +3,7 @@ import {Fragment, useEffect} from "react";
 import PayModal from "./PayModal";
 import {useNavigate} from "react-router-dom";
 import AddCreditModal from "./AddCreditModal";
+import LogoutModal from "../auth/LogoutModal";
 
 function Profile(props) {
     return (
@@ -25,6 +26,7 @@ function Profile(props) {
                         <img src="../assets/images/svg/user/location.svg" alt="location"/>
                         <p>{props.user.address}</p>
                     </div>
+                    <LogoutModal setLoggedIn={props.setLoggedIn}/>
                 </div>
                 <div className="col-lg-6 col-md-12 credit">
                     <div className="row">
@@ -156,7 +158,7 @@ function User(props) {
 
     return (
         <Fragment>
-            <Profile user={props.user}/>
+            <Profile user={props.user} setLoggedIn={props.setLoggedIn}/>
             <Cart cart={props.user.buyList}/>
             <History history={props.user.purchasedList}/>
         </Fragment>

@@ -20,7 +20,7 @@ function App() {
 
     const protectedRoutes = (
         <Routes>
-            <Route path='/user' element={<User user={user}/>}/>
+            <Route path='/user' element={<User user={user} setLoggedIn={props.setLoggedIn}/>}/>
             <Route path='/home' element={<Home buyList={user.buyList}/>}/>
         </Routes>
     )
