@@ -20,3 +20,9 @@ export async function addComment(newComment) {
     // return response.data;
 }
 
+export async function getCommodities(onlyAvailableCommodities, sortBy, {searchBy, query}) {
+    // todo implement api
+    //  How to pass conditions?
+    // const response = await axios.post('http://localhost:8080/api/commodities/');
+    // return response.data;
+}

@@ -4,8 +4,7 @@ import CommodityModal from "./CategoriesModal";
 import React, { useState } from 'react';
 import { toast} from "react-toastify";
 import { addComment, addUserRating } from "../utils/api/Commodities";
-import { useNavigate } from "react-router-dom";
-import { addToBuyList } from "../utils/api/Users";
+import Card from "../general/card/Card";
 
 function Rate() {
     const [rating, setRating] = useState(null);
@@ -216,56 +215,13 @@ function CommentSection(props) {
 }
 
 function Suggestions(props) {
-    const navigate = useNavigate();
-
-    const handleAddToCart = (commodityId) => {
-        addToBuyList(commodityId)
-            .then(commodity => {
-                console.log(`AddToCart: success! ${commodity.id}`);
-            }).catch(error => {
-            if (error.response) {
-                console.log(error.response.data);
-                toast.error(error.response.data.error);
-            } else {
-                console.log('AddToCart: server down?');
-                toast.error('Server not responding');
-            }
-        });
-    };
-
-    const handleCardClick = (commodityId) => {
-        navigate(`/commodities/${commodityId}`);
-    };
-
     return (
         <Fragment>
             <div className="container suggestions">
                 <p className="title">You might also like...</p>
                 <div className="row my-4 no-gutters no-wrap-row justify-content-center">
                     {props.suggestions.map((suggestion, index) => (
-                        <div className="col-lg-3 col-md-6 col-sm-12 card mx-2" key={index}>
-                            <h2 className="card-title" onClick={() => handleCardClick(suggestion.id)}>
-                                {suggestion.title}
-                            </h2>
-                            <h6 className="in_stock">{suggestion.stock} left in stock</h6>
-                            <img
-                                className="card-img-top image"
-                                src={suggestion.imageSrc}
-                                alt="Card image cap"
-                                onClick={() => handleCardClick(suggestion.id)}
-                            />
-                            <div className="card-body d-flex justify-content-between">
-                                <p className="card-text price">{suggestion.price}$</p>
-                                <button
-                                    className="btn"
-                                    type="button"
-                                    onClick={() => handleAddToCart(suggestion.title)}
-                                    disabled={suggestion.stock === 0}
-                                >
-                                    {suggestion.stock === 0 ? 'Sold Out' : 'Add to Cart'}
-                                </button>
-                            </div>
-                        </div>
+                        <Card card={suggestion} index={index} inCart={/*todo: check suggestion in buylist*/}/>
                     ))}
                 </div>
             </div>
