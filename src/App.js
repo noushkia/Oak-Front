@@ -1,14 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { toast, ToastContainer } from "react-toastify";
-import { Spinner } from "react-bootstrap";
-import { Fragment, useEffect, useState } from "react";
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {toast, ToastContainer} from "react-toastify";
+import {Spinner} from "react-bootstrap";
+import {Fragment, useEffect, useState} from "react";
 import Auth from "./auth/Auth";
 import NavBar from "./general/navbar/NavBar";
 import Footer from "./general/footer/Footer";
 import User from "./user/User";
-import { getUser } from "./utils/api/Users";
+import {getUser} from "./utils/api/Users";
 
 function App() {
     const [user, setUser] = useState({});
@@ -19,6 +19,7 @@ function App() {
     const protectedRoutes = (
         <Routes>
             <Route path='/user' element={<User user={user}/>}/>
+            <Route path='/home' element={<Home user={user}/>}/>
         </Routes>
     )
 
@@ -51,7 +52,7 @@ function App() {
                         : loggedIn ?
                             <Fragment>
                                 <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
-                                protectedRoutes
+                                {protectedRoutes}
                                 <Footer/>
                             </Fragment>
                             : <Auth setLoggedIn={setLoggedIn} setUsername={setUsername}/>
