@@ -1,30 +1,37 @@
-import {useState} from 'react';
+import {Fragment, useState} from 'react';
 import {Button, Modal, Spinner} from 'react-bootstrap';
-import {buy} from "../utils/api/Users";
+import {addDiscount, buy} from "../utils/api/Users";
 import {toast} from "react-toastify";
 
 
 function PayModal(props) {
     const [show, setShow] = useState(false);
-    // const [totalPrice, setTotalPrice] = useState(0);
     const [discountCode, setDiscountCode] = useState("");
     const [loading, setLoading] = useState(false);
 
-    // const handleOpenModal = () => {
-    //     // Calculate total price based on items in buyList
-    //     const totalPrice = props.buyList.reduce(
-    //         (accumulator, item) => accumulator + item.price,
-    //         0
-    //     );
-    //     setTotalPrice(totalPrice);
-    //     setIsModalOpen(true);
-    // };
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
 
     const handleDiscountCodeChange = (event) => {
         setDiscountCode(event.target.value);
     };
+
+    const handleAddDiscount = () => {
+        setLoading(true);
+        addDiscount(discountCode)
+            .then(credit => {
+                console.log('AddDiscount: success!');
+            }).catch(error => {
+            if (error.response) {
+                console.log(error.response.data);
+                toast.error(error.response.data.error);
+            } else {
+                console.log('AddDiscount: server down?');
+                toast.error('Server not responding');
+            }
+            setLoading(false);
+        });
+    }
 
     const handleBuy = () => {
         setLoading(true);
@@ -44,35 +51,44 @@ function PayModal(props) {
     };
 
     return (
-        <div className="row d-flex justify-content-center">
-            <div className="col text-center">
-                <button className="btn pay" onClick={handleOpen}>Pay Now!</button>
-            </div>
+        <Fragment>
+            <div className="row d-flex justify-content-center">
+                <div className="col text-center">
+                    <button className="btn pay" onClick={handleOpen}>Pay Now!</button>
+                </div>
 
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header>
-                    <Modal.Title>Are you sure?</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p>Total price: {totalPrice} credits</p>
-                    <label htmlFor="discountCode">Discount code:</label>
-                    <input
-                        type="text"
-                        id="discountCode"
-                        value={discountCode}
-                        onChange={handleDiscountCodeChange}
-                    />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="outline-dark" onClick={handleClose}>
-                        Cancel
-                    </Button>
-                    <Button variant="success" onClick={handleBuy}>
-                        {loading ? <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'Buy'}
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header>
+                        <Modal.Title>Your cart</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ul>
+                            {props.buyList.items.map((item) => (
+                                <li>{item.name} {item.price}$</li>
+                            ))}
+                        </ul>
+                        <input
+                            type="text"
+                            id="discountCode"
+                            value={discountCode}
+                            onChange={handleDiscountCodeChange}
+                        />
+                        <Button variant="dark" onClick={handleAddDiscount}>
+                            {loading ? <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'submit'}
+                        </Button>
+                        <p>total: {props.buyList.total}$</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="outline-dark" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="success" onClick={handleBuy}>
+                            {loading ? <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'Buy!'}
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        </Fragment>
     );
 }
 
