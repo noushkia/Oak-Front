@@ -1,49 +1,73 @@
 import "../style.css"
 import logo from '../../logo.svg';
 import "./navbar.css"
+import "./dropdown.css"
 
-import React from 'react';
-import {Route, Routes} from 'react-router-dom';
-import {getUsername} from "../../utils/Session";
+import React, {useState} from 'react';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
+import {Button, Form, Image, Nav} from "react-bootstrap";
 
 
-function HomeBar(props) {
+function SearchBar() {
+    const navigate = useNavigate();
+    const [type, setType] = useState("");
+    const [query, setQuery] = useState("");
+
+    const handleSearchSubmit = () => {
+        navigate(`/home?query=${query}&type=${type}`);
+    }
+
+    const handleDropdownClick = (selectedType) => {
+        setType(selectedType);
+    }
+
     return (
-        // todo: dropdown should add filter
-        <form className="form-inline search-bar">
+        <Form className="form-inline search-bar">
             <div className="dropdown">
-                <button className="dropbtn">name</button>
+                <Button className="dropbtn">{type || "Select type"}</Button>
                 <div className="dropdown-content">
-                    <a href="#">name</a>
-                    <a href="#">provider name</a>
-                    <a href="#">category</a>
+                    <a href="#" onClick={() => handleDropdownClick("name")}>name</a>
+                    <a href="#" onClick={() => handleDropdownClick("category")}>category</a>
+                    <a href="#" onClick={() => handleDropdownClick("provider")}>provider</a>
                 </div>
             </div>
-            <input className="search-input" type="search" placeholder="search your product..." aria-label="Search"/>
-            <button className="btn btn-outline-success my-2 my-sm-0 search" type="submit"></button>
-            <img className="search" src="../../public/assets/images/svg/header/search.svg" alt="Search"
-                 onClick="document.querySelector('.form-inline button[id=search]').click();"/>
-        </form>
+            <input
+                className="search-input"
+                type="search"
+                placeholder="search your product..."
+                aria-label="Search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+            />
+            <Image className="search" src="../../assets/images/svg/header/search.svg" alt="Search"
+                   onClick={handleSearchSubmit}/>
+        </Form>
     )
 }
 
 function NavBar(props) {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleCartClick = () => {
+        navigate(`/users/${props.user.name}`);
+    }
 
     return (
-        <nav className="navbar sticky-top navbar-light bg-white justify-content-between">
-            <form className="form-inline">
-                <img className="baloot-logo" src={logo} alt="Logo"/>
-                <a className="baloot-brand">Baloot</a>
-            </form>
-            <Routes>
-                <Route path='/home/' component={HomeBar}/>
-            </Routes>
-            <form className="form-inline">
-                {/*todo: redirect to user*/}
-                <a className="text" href="#">{getUsername()}</a>
-                <button className="btn cart" type="button"><span>Cart</span><span>4</span></button>
-            </form>
-        </nav>
+        <Nav className="navbar sticky-top navbar-light bg-white justify-content-between">
+            <Link className="form-inline" to="/home">
+                <Image className="baloot-logo" src={logo} alt="Logo"/>
+                <span className="baloot-brand">Baloot</span>
+            </Link>
+            {location.pathname === "/home" && <SearchBar/>}
+            <Form className="form-inline">
+                <Link className="text" to={`/users/${props.user.name}`}>
+                    #{props.user.name}
+                </Link>
+                <Button className="btn cart" type="button"
+                        onClick={handleCartClick}><span>Cart</span><span>{props.user.buyList.length}</span></Button>
+            </Form>
+        </Nav>
     )
 }
 

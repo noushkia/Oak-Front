@@ -9,6 +9,7 @@ import NavBar from "./general/navbar/NavBar";
 import Footer from "./general/footer/Footer";
 import User from "./user/User";
 import {getUser} from "./utils/api/Users";
+import Home from "./home/Home";
 
 function App() {
     const [user, setUser] = useState({});
@@ -16,10 +17,11 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
+
     const protectedRoutes = (
         <Routes>
             <Route path='/user' element={<User user={user}/>}/>
-            <Route path='/home' element={<Home user={user}/>}/>
+            <Route path='/home' element={<Home buyList={user.buyList}/>}/>
         </Routes>
     )
 
@@ -51,7 +53,7 @@ function App() {
                         <div className='text-center'><Spinner animation="border" variant='info'/></div>
                         : loggedIn ?
                             <Fragment>
-                                <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+                                <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user}/>
                                 {protectedRoutes}
                                 <Footer/>
                             </Fragment>

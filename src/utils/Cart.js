@@ -1,6 +1,6 @@
-export function getInCart(commodityId, cartCount) {
-    if (cartCount.hasOwnProperty(commodityId)) {
-        return cartCount[commodityId];
+export function getInCart(commodityId, itemsCount) {
+    if (itemsCount.hasOwnProperty(commodityId)) {
+        return itemsCount[commodityId];
     }
     return 0;
 }
