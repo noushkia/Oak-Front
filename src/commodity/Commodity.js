@@ -1,9 +1,9 @@
 import "./commodity.css"
-import { Fragment, useEffect } from "react";
+import {Fragment, useEffect} from "react";
 import CommodityModal from "./CategoriesModal";
-import React, { useState } from 'react';
-import { toast} from "react-toastify";
-import { addComment, addUserRating } from "../utils/api/Commodities";
+import React, {useState} from 'react';
+import {toast} from "react-toastify";
+import {addComment, addUserRating, voteComment} from "../utils/api/Commodities";
 import Card from "../general/card/Card";
 
 function Rate() {
@@ -132,6 +132,11 @@ function CommodityInfo(props) {
 function CommentSection(props) {
     const [newComment, setNewComment] = useState('');
 
+    const handleVoteComment = (username, commentId, vote) => {
+        voteComment(username, commentId, vote).then(r => {}); // todo: what to do with the promise?
+        console.log(`Voted comment: `);
+    };
+
     const handleCommentChange = (event) => {
         setNewComment(event.target.value);
     };
@@ -139,7 +144,7 @@ function CommentSection(props) {
     const handleCommentSubmit = (event) => {
         event.preventDefault();
         if (newComment) {
-            addComment(newComment); // todo: what to do with the promise?
+            addComment(newComment).then(r => {}); // todo: what to do with the promise?
             console.log(`Submitted comment: ${newComment}`);
             setNewComment('');
         } else {
@@ -163,12 +168,14 @@ function CommentSection(props) {
                         <img
                             src="../assets/images/svg/commodity/like.svg"
                             alt="like"
+                            onClick={() => handleVoteComment(props.username, comment.id, 1)}
                         />{' '}
                         &nbsp;&nbsp;
                         {comment.dislikes}{' '}
                         <img
                             src="../assets/images/svg/commodity/dislike.svg"
                             alt="dislike"
+                            onClick={() => handleVoteComment(props.username, comment.id, -1)}
                         />
                     </p>
                 </div>
