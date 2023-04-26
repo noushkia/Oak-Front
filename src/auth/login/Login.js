@@ -4,9 +4,11 @@ import {Fragment, useEffect, useState} from "react";
 import {Spinner} from "react-bootstrap";
 import {toast} from "react-toastify";
 import {loginUser} from "../../utils/api/Users";
+import {useNavigate} from "react-router-dom";
 import {saveUsername} from "../../utils/Session";
 
 function Login(props) {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -17,8 +19,8 @@ function Login(props) {
         }; // cleanup function
     }, []);
 
-    function login(e) {
-        e.preventDefault();
+    function login(event) {
+        event.preventDefault();
         const formData = {
             username: username,
             password: password,
@@ -26,9 +28,10 @@ function Login(props) {
         setLoading(true);
         loginUser(formData)
             .then(user => {
-                props.setUsername(username);
+                saveUsername(username);
                 props.setLoggedIn(true);
                 console.log('Login: success!');
+                navigate("/home");
             }).catch(error => {
             if (error.response) {
                 console.log(error.response.data);

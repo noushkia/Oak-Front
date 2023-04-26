@@ -10,40 +10,39 @@ import Footer from "./general/footer/Footer";
 import User from "./user/User";
 import {getUser} from "./utils/api/Users";
 import Home from "./home/Home";
+import {getUsername} from "./utils/Session";
 
 function App() {
-    const [user, setUser] = useState({});
-    const [username, setUsername] = useState("");
+    const [currUser, setCurrUser] = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
-
     const protectedRoutes = (
         <Routes>
-            <Route path='/user' element={<User user={user} setLoggedIn={props.setLoggedIn}/>}/>
-            <Route path='/home' element={<Home buyList={user.buyList}/>}/>
+            <Route path='/user' element={<User currUser={currUser} setLoggedIn={setLoggedIn}/>}/>
+            <Route path='/home' element={<Home buyList={currUser.buyList}/>}/>
+            <Route path='/' element={<Home buyList={currUser.buyList}/>}/>
         </Routes>
     )
 
     useEffect(() => {
-        if (username !== "") {
-            console.log(username)
+        const username = getUsername();
+        if (username !== '') {
             setLoggedIn(true);
             setLoading(true);
             getUser(username)
-                .then(currUser => {
-                    setUser(currUser);
+                .then((currUser) => {
+                    setCurrUser(currUser);
                     setLoggedIn(true);
                     setLoading(false);
                 })
-                .catch(e => {
-                    if (!e.response)
-                        toast.error('Connection Error');
+                .catch((e) => {
+                    if (!e.response) toast.error('Connection Error');
                     setLoggedIn(false);
                     setLoading(false);
-                })
+                });
         }
-    }, []);
+    }, [getUsername()]);
 
     return (
         <Router>
@@ -53,11 +52,11 @@ function App() {
                         <div className='text-center'><Spinner animation="border" variant='info'/></div>
                         : loggedIn ?
                             <Fragment>
-                                <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user}/>
+                                <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} currUser={currUser}/>
                                 {protectedRoutes}
                                 <Footer/>
                             </Fragment>
-                            : <Auth setLoggedIn={setLoggedIn} setUsername={setUsername}/>
+                            : <Auth setLoggedIn={setLoggedIn}/>
                 }
                 <ToastContainer position='bottom-right' rtl={true}/>
             </div>

@@ -34,8 +34,8 @@ function Auth(props) {
                                 <label htmlFor="reg-log"></label>
                                 <div className="card-3d-wrap mx-auto">
                                     <div className="card-3d-wrapper">
-                                        {isLogin ? <Login setLoggedIn={props.setLoggedIn} setUsername={props.setUsername}/> :
-                                            <SignUp setLoggedIn={props.setLoggedIn} setUsername={props.setUsername}/>}
+                                        {isLogin ? <Login setLoggedIn={props.setLoggedIn}/> :
+                                            <SignUp setLoggedIn={props.setLoggedIn}/>}
                                     </div>
                                 </div>
                             </div>

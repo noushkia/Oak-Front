@@ -1,5 +1,5 @@
-import "../style.css"
 import logo from '../../logo.svg';
+import "../style.css"
 import "./navbar.css"
 import "./dropdown.css"
 
@@ -50,7 +50,7 @@ function NavBar(props) {
     const location = useLocation();
 
     const handleCartClick = () => {
-        navigate(`/users/${props.user.name}`);
+        navigate(`/users/${props.currUser.username}`);
     }
 
     return (
@@ -61,11 +61,11 @@ function NavBar(props) {
             </Link>
             {location.pathname === "/home" && <SearchBar/>}
             <Form className="form-inline">
-                <Link className="text" to={`/users/${props.user.name}`}>
-                    #{props.user.name}
+                <Link className="text" to={`/users/${props.currUser.username}`}>
+                    #{props.currUser.username}
                 </Link>
                 <Button className="btn cart" type="button"
-                        onClick={handleCartClick}><span>Cart</span><span>{props.user.buyList.length}</span></Button>
+                        onClick={handleCartClick}><span>Cart</span><span>{props.currUser.buyList.items.length}</span></Button>
             </Form>
         </Nav>
     )

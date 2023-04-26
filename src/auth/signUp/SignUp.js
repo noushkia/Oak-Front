@@ -2,12 +2,14 @@ import '../auth.css';
 
 import {Fragment, useEffect, useState} from "react";
 import {signUpUser} from "../../utils/api/Users";
-import {saveUsername} from "../../utils/Session";
 import {toast} from "react-toastify";
 import {Spinner} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
+import {saveUsername} from "../../utils/Session";
 
 
 function SignUp(props) {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -33,9 +35,10 @@ function SignUp(props) {
         };
         signUpUser(formData)
             .then(user => {
-                props.setUsername(username);
+                saveUsername(username);
                 props.setLoggedIn(true);
                 console.log('SignUp: success!');
+                navigate("/home");
             })
             .catch(error => {
                     if (error.response) {
