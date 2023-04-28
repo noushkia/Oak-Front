@@ -62,8 +62,11 @@ function Commodities(props) {
                 <div className="row justify-content-center">
                     {
                         props.commodities.map((commodity, index) => (
-                            <Card card={commodity} index={index} key={commodity.id}
-                                  inCart={getInCart(commodity.id, props.itemsCount)}/>
+                            <Card
+                                card={commodity} index={index} key={commodity.id}
+                                inCart={getInCart(commodity.id, props.itemsCount)}
+                                setCurrUser={props.setCurrUser}
+                            />
                         ))
                     }
                 </div>
@@ -83,7 +86,7 @@ function Home(props) {
 
     const handlePageChange = (event) => {
         const selectedPage = event.selected;
-        setPage(selectedPage+1);
+        setPage(selectedPage + 1);
     };
 
     useEffect(() => {
@@ -113,10 +116,15 @@ function Home(props) {
 
     return (
         <Fragment>
-            <FilterBar setShowAvailableCommodities={setShowAvailableCommodities}
-                       setSortingAttribute={setSortingAttribute}/>
-            <Commodities commodities={commodities}
-                         itemsCount={props.buyList.itemsCount}/>
+            <FilterBar
+                setShowAvailableCommodities={setShowAvailableCommodities}
+                setSortingAttribute={setSortingAttribute}
+            />
+            <Commodities
+                commodities={commodities}
+                itemsCount={props.buyList.itemsCount}
+                setCurrUser={props.setCurrUser}
+            />
             {totalPage < 2 ? null : (
                 <div className="pagination-container">
                     <ReactPaginate

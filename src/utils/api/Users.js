@@ -1,14 +1,13 @@
 import axios from "axios";
+import {getUsername} from "../Session";
 
 
 export async function loginUser(formData) {
-    const response = await axios.post('http://localhost:8080/api/users/login', formData);
-    return response.data;
+    return (await axios.post('http://localhost:8080/api/users/login', formData)).data;
 }
 
 export async function signUpUser(formData) {
-    const response = await axios.post('http://localhost:8080/api/users/signup', formData);
-    return response.data;
+    return (await axios.post('http://localhost:8080/api/users/signup', formData)).data;
 }
 
 export async function getUser(username) {
@@ -31,10 +30,13 @@ export async function addDiscount(code) {
 
 export async function buy() {
     // todo implement api
-    const response = await axios.post('http://localhost:8080/api/users/buy');
-    return response.data;
+    return (await axios.post(`http://localhost:8080/api/users/${getUsername()}/buy`)).data;
 }
 
-export async function updateInCart(commodityId, quantity) {
-    // todo implement api
+export async function addToBuyList(formData) {
+    return (await axios.post(`http://localhost:8080/api/users/${getUsername()}/buyList`, formData)).data;
+}
+
+export async function updateInCart(formData) {
+    return (await axios.put(`http://localhost:8080/api/users/${getUsername()}/buyList`, formData)).data;
 }

@@ -1,19 +1,41 @@
-import {updateInCart} from "../../utils/api/Users";
+import {addToBuyList, updateInCart} from "../../utils/api/Users";
 import {toast} from "react-toastify";
 import React, {Fragment} from "react";
 import "./card.css";
 
 function AddToCartButton(props) {
     const handleCartUpdate = (commodityId, quantity) => {
-        updateInCart(commodityId, quantity)
-            .then(commodity => {
-                console.log(`CartUpdate: success! ${commodityId}`);
+        const body = {
+            commodityId: commodityId,
+            quantity: quantity
+        };
+        updateInCart(body)
+            .then(user => {
+                props.setCurrUser(user);
+                console.log(`CartUpdate: success!`);
             }).catch(error => {
             if (error.response) {
                 console.log(error.response.data);
                 toast.error(error.response.data.error);
             } else {
-                console.log('RemoveFromCart: server down?');
+                console.log('CartUpdate: server down?');
+                toast.error('Server not responding');
+            }
+        });
+    };
+
+    const handleAddToCart = (commodityId) => {
+        const body = {commodityId: commodityId};
+        addToBuyList(body)
+            .then(user => {
+                props.setCurrUser(user);
+                console.log(`AddToCart: success!`);
+            }).catch(error => {
+            if (error.response) {
+                console.log(error.response.data);
+                toast.error(error.response.data.error);
+            } else {
+                console.log('AddToCart: server down?');
                 toast.error('Server not responding');
             }
         });
@@ -28,7 +50,7 @@ function AddToCartButton(props) {
                             className="btn"
                             type="button"
                             onClick={() => handleCartUpdate(props.id, -1)}
-                        > todo: check if the button is updated when item is removed using -
+                        >
                             -
                         </button>
                         <button className="btn" type="button" disabled>
@@ -47,7 +69,7 @@ function AddToCartButton(props) {
                     <button
                         className="btn"
                         type="button"
-                        onClick={() => handleCartUpdate(props.id, 1)}
+                        onClick={() => handleAddToCart(props.id)}
                         disabled={props.inStock === 0}
                     >
                         {props.inStock === 0 ? 'Sold Out' : 'Add to Cart'}

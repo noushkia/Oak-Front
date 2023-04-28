@@ -1,7 +1,7 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import "./card.css";
-import AddToCartButton from "./addToCartButton";
+import AddToCartButton from "./AddToCartButton";
 
 function Card(props) {
     const navigate = useNavigate();
@@ -25,7 +25,12 @@ function Card(props) {
             />
             <div className="card-body d-flex justify-content-between">
                 <p className="card-text price">{props.card.price}$</p>
-                <AddToCartButton inCart={props.inCart} id={props.card.id} inStock={props.card.inStock}/>
+                <AddToCartButton
+                    inCart={props.inCart}
+                    id={props.card.id}
+                    inStock={props.card.inStock}
+                    setCurrUser={props.setCurrUser}
+                />
             </div>
         </div>
     )
