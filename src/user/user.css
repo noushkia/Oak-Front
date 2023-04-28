@@ -25,6 +25,8 @@
 .user img {
     width: 18px;
     height: 18px;
+    box-sizing: initial !important;
+    margin-right: 1rem;
 }
 
 .user .credit * {
@@ -55,6 +57,7 @@
 .history .title img {
     width: 20px;
     height: 20px;
+    box-sizing: initial !important;
 }
 
 .cart .title span,

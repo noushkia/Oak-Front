@@ -4,7 +4,7 @@ import {addCredit} from "../utils/api/Users";
 import {toast} from "react-toastify";
 
 
-function AddCreditModal() {
+function AddCreditModal(props) {
     const [show, setShow] = useState(false);
     const [creditToAdd, setCreditToAdd] = useState('');
     const [loading, setLoading] = useState(false);
@@ -14,10 +14,10 @@ function AddCreditModal() {
 
     const handleAddCredit = () => {
         setLoading(true);
-        const credit = parseInt(creditToAdd);
-        addCredit(credit)
-            .then(newCredit => {
-                console.log(newCredit);
+        const body = {credit: parseInt(creditToAdd)};
+        addCredit(body)
+            .then(user => {
+                props.setCurrUser(user);
                 console.log('AddCredit: success!');
             }).catch(error => {
             if (error.response) {
@@ -27,9 +27,10 @@ function AddCreditModal() {
                 console.log('AddCredit: server down?');
                 toast.error('Server not responding');
             }
-            setLoading(false);
         });
+        setLoading(false);
         setCreditToAdd('');
+        handleClose();
     };
 
     return (

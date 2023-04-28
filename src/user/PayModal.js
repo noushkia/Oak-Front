@@ -2,12 +2,14 @@ import {Fragment, useState} from 'react';
 import {Button, Modal, Spinner} from 'react-bootstrap';
 import {addDiscount, buy} from "../utils/api/Users";
 import {toast} from "react-toastify";
+import {getInCart} from "../utils/Cart";
 
 
 function PayModal(props) {
     const [show, setShow] = useState(false);
     const [discountCode, setDiscountCode] = useState("");
     const [loading, setLoading] = useState(false);
+    const [discountLoading, setDiscountLoading] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
@@ -17,9 +19,10 @@ function PayModal(props) {
     };
 
     const handleAddDiscount = () => {
-        setLoading(true);
+        setDiscountLoading(true);
         addDiscount(discountCode)
-            .then(credit => {
+            .then(user => {
+                props.setCurrUser(user);
                 console.log('AddDiscount: success!');
             }).catch(error => {
             if (error.response) {
@@ -29,14 +32,15 @@ function PayModal(props) {
                 console.log('AddDiscount: server down?');
                 toast.error('Server not responding');
             }
-            setLoading(false);
         });
+        setDiscountLoading(false);
     }
 
     const handleBuy = () => {
         setLoading(true);
         buy()
-            .then(credit => {
+            .then(user => {
+                props.setCurrUser(user);
                 console.log('Buy: success!');
             }).catch(error => {
             if (error.response) {
@@ -46,8 +50,9 @@ function PayModal(props) {
                 console.log('Buy: server down?');
                 toast.error('Server not responding');
             }
-            setLoading(false);
         });
+        setLoading(false);
+        handleClose();
     };
 
     const buyListItems = Array.isArray(props.buyList.items) ? props.buyList.items : Object.values(props.buyList.items);
@@ -63,11 +68,21 @@ function PayModal(props) {
                     <Modal.Header>
                         <Modal.Title>Your cart</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body style={{padding: "30px"}}>
                         <ul>
-                            {buyListItems.map((item) => (
-                                <li>{item.name} {item.price}$</li>
-                            ))}
+                            <ul>
+                                {buyListItems.map(({id, name, price}) => {
+                                    const itemCount = getInCart(id, props.buyList.itemsCount)
+                                    const itemTotal = price * itemCount
+
+                                    return (
+                                        <li key={name} style={{display: 'flex', justifyContent: 'space-between'}}>
+                                            <span>{name} x{itemCount}</span>
+                                            <span>{itemTotal}$</span>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
                         </ul>
                         <input
                             type="text"
@@ -76,7 +91,8 @@ function PayModal(props) {
                             onChange={handleDiscountCodeChange}
                         />
                         <Button variant="dark" onClick={handleAddDiscount}>
-                            {loading ? <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'submit'}
+                            {discountLoading ?
+                                <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'submit'}
                         </Button>
                         <p>total: {props.buyList.total}$</p>
                     </Modal.Body>

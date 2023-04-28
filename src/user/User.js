@@ -4,27 +4,37 @@ import PayModal from "./PayModal";
 import {useNavigate} from "react-router-dom";
 import AddCreditModal from "./AddCreditModal";
 import LogoutModal from "../auth/LogoutModal";
+import AddToCartButton from "../general/card/AddToCartButton";
+import {getInCart} from "../utils/Cart";
 
 function Profile(props) {
     return (
         <div className="container user">
             <div className="row d-flex">
                 <div className="col-lg-6 col-md-12">
-                    <div className="row">
-                        <img src="../assets/images/svg/user/user.svg" alt="user"/>
-                        <p>{props.currUser.username}</p>
+                    <div className="row align-items-center mb-2">
+                        <div className="d-flex align-items-center">
+                            <img src="../assets/images/svg/user/user.svg" alt="user"/>
+                            <p className="m-0">{props.currUser.username}</p>
+                        </div>
                     </div>
-                    <div className="row">
-                        <img src="../assets/images/svg/user/mail.svg" alt="mail"/>
-                        <p>{props.currUser.email}</p>
+                    <div className="row align-items-center mb-2">
+                        <div className="d-flex align-items-center">
+                            <img src="../assets/images/svg/user/mail.svg" alt="mail"/>
+                            <p className="m-0">{props.currUser.email}</p>
+                        </div>
                     </div>
-                    <div className="row">
-                        <img src="../assets/images/svg/user/calendar.svg" alt="calendar"/>
-                        <p>{props.currUser.birthDate}</p>
+                    <div className="row align-items-center mb-2">
+                        <div className="d-flex align-items-center">
+                            <img src="../assets/images/svg/user/calendar.svg" alt="calendar"/>
+                            <p className="m-0">{props.currUser.birthDate}</p>
+                        </div>
                     </div>
-                    <div className="row">
-                        <img src="../assets/images/svg/user/location.svg" alt="location"/>
-                        <p>{props.currUser.address}</p>
+                    <div className="row align-items-center mb-2">
+                        <div className="d-flex align-items-center">
+                            <img src="../assets/images/svg/user/location.svg" alt="location"/>
+                            <p className="m-0">{props.currUser.address}</p>
+                        </div>
                     </div>
                     <LogoutModal setLoggedIn={props.setLoggedIn}/>
                 </div>
@@ -32,16 +42,15 @@ function Profile(props) {
                     <div className="row">
                         <p className="amount">{props.currUser.credit}</p>
                     </div>
-                    <AddCreditModal/>
+                    <AddCreditModal setCurrUser={props.setCurrUser}/>
                 </div>
             </div>
         </div>
     );
 }
 
-function CommodityRow({item, showCart}) {
-    console.log(`Commodity item: ${item}`);
-    const {id, image, name, categories, price, providerId, rating, inStock} = item;
+function CommodityRow(props) {
+    const {id, image, name, categories, price, providerId, rating, inStock} = props.item;
 
     const navigate = useNavigate();
 
@@ -52,9 +61,14 @@ function CommodityRow({item, showCart}) {
     return (
         <tr>
             <td>
-                <img src={image} alt={name} onClick={() => handleCardClick(id)}/>
+                <img
+                    src={image}
+                    alt={name}
+                    onClick={() => handleCardClick(id)}
+                    style={{cursor: "pointer"}}
+                />
             </td>
-            <td><span onClick={() => handleCardClick(id)}>{name}</span></td>
+            <td>{name}</td>
             <td>{categories.join(", ")}</td>
             <td>{price}</td>
             <td>{providerId}</td>
@@ -62,15 +76,14 @@ function CommodityRow({item, showCart}) {
             <td>{inStock}</td>
             <td>
                 {
-                    showCart ? (
-                        <div className="btn-group">
-                            <button className="btn" type="button">-</button>
-                            <button className="btn" type="button" disabled>
-                                {item.inCart}
-                            </button>
-                            <button className="btn" type="button">+</button>
-                        </div>
-                    ) : (item.quantity)
+                    props.showCart ? (
+                        <AddToCartButton
+                            inCart={props.inCart}
+                            id={id}
+                            inStock={inStock}
+                            setCurrUser={props.setCurrUser}
+                        />
+                    ) : (props.quantity)
                 }
             </td>
         </tr>
@@ -78,14 +91,16 @@ function CommodityRow({item, showCart}) {
 }
 
 function Cart(props) {
-    const cartItems = Array.isArray(props.cart.items) ? props.cart.items : Object.values(props.cart.items);
+    const cartItems = Array.isArray(props.buyList.items) ? props.buyList.items : Object.values(props.buyList.items);
 
     return (
         <Fragment>
             <div className="container cart" id="cart">
                 <div className="row title align-items-center">
-                    <img src="../assets/images/svg/user/cart.svg" alt="cart"/>
-                    <span>&nbsp; Cart</span>
+                    <div className="d-flex align-items-center">
+                        <img src="../assets/images/svg/user/cart.svg" alt="cart"/>
+                        <span>&nbsp; Cart</span>
+                    </div>
                 </div>
 
                 <div className="row">
@@ -104,27 +119,35 @@ function Cart(props) {
                         </thead>
                         <tbody className="table-body">
                         {cartItems.map((item) => (
-                            <CommodityRow key={item.id} item={item} showCart={true}/>
+                            <CommodityRow
+                                key={item.id}
+                                item={item}
+                                showCart={true}
+                                inCart={getInCart(item.id, props.buyList.itemsCount)}
+                                setCurrUser={props.setCurrUser}
+                            />
                         ))}
                         </tbody>
                     </table>
                 </div>
 
-                <PayModal buyList={props.buyList}/>
+                <PayModal buyList={props.buyList} setCurrUser={props.setCurrUser}/>
             </div>
         </Fragment>
     )
 }
 
 function History(props) {
-    const historyItems = Array.isArray(props.history.items) ? props.history.items : Object.values(props.history.items);
+    const historyItems = Array.isArray(props.purchasedList.items) ? props.purchasedList.items : Object.values(props.purchasedList.items);
 
     return (
         <Fragment>
             <div className="container history" id="history">
                 <div className="row title align-items-center">
-                    <img src="../assets/images/svg/user/history.svg" alt="history"/>
-                    <span>&nbsp; History</span>
+                    <div className="d-flex align-items-center">
+                        <img src="../assets/images/svg/user/history.svg" alt="history"/>
+                        <span>&nbsp; History</span>
+                    </div>
                 </div>
 
                 <div className="row">
@@ -143,7 +166,12 @@ function History(props) {
                         </thead>
                         <tbody className="table-body">
                         {historyItems.map((item) => (
-                            <CommodityRow key={item.id} item={item} showCart={false}/>
+                            <CommodityRow
+                                key={item.id}
+                                item={item}
+                                showCart={false}
+                                quantity={getInCart(item.id, props.purchasedList.itemsCount)}
+                            />
                         ))}
                         </tbody>
                     </table>
@@ -155,16 +183,16 @@ function History(props) {
 
 function User(props) {
     useEffect(() => {
-        document.title = 'profile';
+        document.title = props.currUser.username.toString();
         return () => {
         };
-    }, []);
+    }, [props.currUser.username]);
 
     return (
         <Fragment>
-            <Profile currUser={props.currUser} setLoggedIn={props.setLoggedIn}/>
-            <Cart cart={props.currUser.buyList}/>
-            <History history={props.currUser.purchasedList}/>
+            <Profile currUser={props.currUser} setLoggedIn={props.setLoggedIn} setCurrUser={props.setCurrUser}/>
+            <Cart buyList={props.currUser.buyList} setCurrUser={props.setCurrUser}/>
+            <History purchasedList={props.currUser.purchasedList}/>
         </Fragment>
     )
 }

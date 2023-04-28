@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 import {removeUsername} from "../utils/Session";
 
 function LogoutModal(props) {
@@ -20,8 +19,7 @@ function LogoutModal(props) {
 
     return (
         <>
-            {/*todo: <i className="flaticon-log-out"></i>*/}
-            <Link onClick={handleOpen} to='#'>Exit<i className="flaticon-log-out"></i></Link>
+            <button className="btn" onClick={handleOpen}>logout</button>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header>
@@ -32,7 +30,7 @@ function LogoutModal(props) {
                         Cancel
                     </Button>
                     <Button variant="success" onClick={handleLogout}>
-                        Exit
+                        logout
                     </Button>
                 </Modal.Footer>
             </Modal>
