@@ -1,9 +1,13 @@
 import React, {Fragment, useEffect, useState} from "react";
 import "./home.css";
+import "./filter.css";
+import "./pagination.css";
 import Card from "../general/card/Card";
 import {getInCart} from "../utils/Cart";
 import {getCommodities} from "../utils/api/Commodities";
 import {useLocation} from "react-router-dom";
+import {toast} from "react-toastify";
+import ReactPaginate from 'react-paginate';
 
 
 function FilterBar(props) {
@@ -52,16 +56,16 @@ function FilterBar(props) {
 
 
 function Commodities(props) {
-    const commodityItems = Array.isArray(props.buyList.items) ? props.buyList.items : Object.values(props.buyList.items);
-
     return (
         <Fragment>
             <div className="container home">
-                <div className="row my-4 no-gutters no-wrap-row justify-content-center">
-                    {commodityItems.map((commodity, index) => (
-                        <Card card={commodity} index={index} key={commodity.id}
-                              inCart={getInCart(commodity.id, props.buyList.itemsCount)}/>
-                    ))}
+                <div className="row justify-content-center">
+                    {
+                        props.commodities.map((commodity, index) => (
+                            <Card card={commodity} index={index} key={commodity.id}
+                                  inCart={getInCart(commodity.id, props.itemsCount)}/>
+                        ))
+                    }
                 </div>
             </div>
         </Fragment>
@@ -70,24 +74,65 @@ function Commodities(props) {
 
 function Home(props) {
     const location = useLocation();
+    const [totalPage, setTotalPage] = useState(0);
+    const [page, setPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState({type: '', query: ''});
     const [showAvailableCommodities, setShowAvailableCommodities] = useState(false);
     const [sortingAttribute, setSortingAttribute] = useState("");
+    const [commodities, setCommodities] = useState([]);
+
+    const handlePageChange = (event) => {
+        const selectedPage = event.selected;
+        setPage(selectedPage+1);
+    };
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const typeValue = params.get("type") || "";
+        const queryValue = params.get("query") || "";
+        setSearchQuery({type: typeValue, query: queryValue});
+    }, [location.search]);
 
     useEffect(() => {
         document.title = 'Home';
-        const params = new URLSearchParams(location.search);
-        const type = params.get("type") || "";
-        const query = params.get("query") || "";
-        setSearchQuery({type, query});
-    }, [location.search])
+
+        getCommodities({page}, showAvailableCommodities, sortingAttribute, searchQuery)
+            .then(response => {
+                setCommodities(response.commodities);
+                setTotalPage(response.pages);
+            }).catch(error => {
+            if (error.response) {
+                console.log(error.response.data);
+                toast.error(error.response.data.error);
+            } else {
+                console.log('Home: server down?');
+                toast.error('Server not responding');
+            }
+        });
+    }, [page, showAvailableCommodities, sortingAttribute, searchQuery]);
 
     return (
         <Fragment>
             <FilterBar setShowAvailableCommodities={setShowAvailableCommodities}
                        setSortingAttribute={setSortingAttribute}/>
-            <Commodities commodities={getCommodities(showAvailableCommodities, sortingAttribute, searchQuery)}
-                         buyList={props.buyList}/>
+            <Commodities commodities={commodities}
+                         itemsCount={props.buyList.itemsCount}/>
+            {totalPage < 2 ? null : (
+                <div className="pagination-container">
+                    <ReactPaginate
+                        previousLabel={"<"}
+                        nextLabel={">"}
+                        breakLabel={"..."}
+                        breakClassName={"break-me"}
+                        pageCount={totalPage}
+                        marginPagesDisplayed={1}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageChange}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"}/>
+                </div>
+            )}
         </Fragment>
     )
 }

@@ -3,11 +3,11 @@ import {toast} from "react-toastify";
 import React, {Fragment} from "react";
 import "./card.css";
 
-function addToCartButton(props) {
+function AddToCartButton(props) {
     const handleCartUpdate = (commodityId, quantity) => {
         updateInCart(commodityId, quantity)
             .then(commodity => {
-                console.log(`RemoveFromCart: success! ${commodityId}`);
+                console.log(`CartUpdate: success! ${commodityId}`);
             }).catch(error => {
             if (error.response) {
                 console.log(error.response.data);
@@ -57,4 +57,4 @@ function addToCartButton(props) {
     )
 }
 
-export default addToCartButton;
+export default AddToCartButton;

@@ -8,24 +8,25 @@ import Auth from "./auth/Auth";
 import NavBar from "./general/navbar/NavBar";
 import Footer from "./general/footer/Footer";
 import User from "./user/User";
-import {getUser} from "./utils/api/Users";
 import Home from "./home/Home";
 import {getUsername} from "./utils/Session";
+import {getUser} from "./utils/api/Users";
 
 function App() {
     const [currUser, setCurrUser] = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const username = getUsername();
+
     const protectedRoutes = (
         <Routes>
-            <Route path='/user' element={<User currUser={currUser} setLoggedIn={setLoggedIn}/>}/>
+            <Route path={`/users/${currUser.username}`} element={<User currUser={currUser} setLoggedIn={setLoggedIn}/>}/>
             <Route path='/home' element={<Home buyList={currUser.buyList}/>}/>
             <Route path='/' element={<Navigate to='/home'/>}/>
         </Routes>
     )
 
-    const username = getUsername();
     useEffect(() => {
         if (username !== '') {
             setLoggedIn(true);
@@ -58,7 +59,7 @@ function App() {
                             </Fragment>
                             : <Auth setLoggedIn={setLoggedIn}/>
                 }
-                <ToastContainer position='bottom-right' rtl={true}/>
+                <ToastContainer position='bottom-left'/>
             </div>
         </Router>
     );

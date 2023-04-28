@@ -28,25 +28,24 @@ function SearchBar() {
                 <button className="dropbtn" onClick={(event) => {
                     event.preventDefault();
                 }}>{type || "Select type"}</button>
-                    <div className="dropdown-content">
-                    <button onClick={(event) => handleDropdownClick("name", event)}>name
-                </button>
-                <button onClick={(event) => handleDropdownClick("category", event)}>category</button>
-                <button onClick={(event) => handleDropdownClick("provider", event)}>provider</button>
+                <div className="dropdown-content">
+                    <button onClick={(event) => handleDropdownClick("name", event)}>name</button>
+                    <button onClick={(event) => handleDropdownClick("category", event)}>category</button>
+                    <button onClick={(event) => handleDropdownClick("provider", event)}>provider</button>
+                </div>
             </div>
-        </div>
-    <input
-        className="search-input"
-        type="search"
-        placeholder="search your product..."
-        aria-label="Search"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-    />
-    <Image className="search" src="../../assets/images/svg/header/search.svg" alt="Search"
-           onClick={handleSearchSubmit}/>
-</form>
-)
+            <input
+                className="search-input"
+                type="search"
+                placeholder="search your product..."
+                aria-label="Search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+            />
+            <Image className="search" src="../../assets/images/svg/header/search.svg" alt="Search"
+                   onClick={handleSearchSubmit}/>
+        </form>
+    )
 }
 
 function NavBar(props) {

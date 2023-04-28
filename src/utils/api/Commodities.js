@@ -26,9 +26,21 @@ export async function voteComment(username, commentId, vote) {
     // return response.data;
 }
 
-export async function getCommodities(onlyAvailableCommodities, sortBy, {type, query}) {
-    // todo implement api
-    //  How to pass conditions?
-    // const response = await axios.post('http://localhost:8080/api/commodities/');
-    // return response.data;
+export async function getCommodities({page, limit = 12}, showAvailableCommodities, sortingAttribute, {type, query}) {
+    const params = new URLSearchParams();
+    if (showAvailableCommodities) {
+        params.append('onlyAvailableCommodities', showAvailableCommodities);
+    }
+    if (sortingAttribute !== "") {
+        params.append('sortBy', sortingAttribute);
+    }
+    if (type !== "" && query !== "") {
+        params.append('searchType', type);
+        params.append('searchQuery', query);
+    }
+    params.append('page', page);
+    params.append('limit', limit.toString());
+    console.log(`http://localhost:8080/api/commodities/?${params.toString()}`);
+    const response = await axios.get(`http://localhost:8080/api/commodities/?${params.toString()}`);
+    return response.data;
 }

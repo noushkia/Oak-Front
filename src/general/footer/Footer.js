@@ -39,14 +39,13 @@ function Footer() {
         <footer>
             <div className="row">
                 {footerItems.map((item, index) => (
-                    <div className="col">
+                    <div className="col" key={index}>
                         <div className="col-md-2">
                             <div className="footer-img-square-56">
                                 <img
                                     className={`${item.alt}-img`}
                                     src={item.icon}
                                     alt={item.alt}
-                                    key={index}
                                 />
                             </div>
                             <p className="text-caption color-700">{item.title}</p>
