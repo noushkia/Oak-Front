@@ -14,7 +14,7 @@ function Auth(props) {
 
     return (
         <Fragment>
-            <div className="section">
+            <div className="section auth">
                 <div className="container">
                     <div className="row full-height justify-content-center">
                         <div className="col-12 text-center align-self-center py-5">

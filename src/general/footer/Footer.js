@@ -46,6 +46,7 @@ function Footer() {
                                     className={`${item.alt}-img`}
                                     src={item.icon}
                                     alt={item.alt}
+                                    key={index}
                                 />
                             </div>
                             <p className="text-caption color-700">{item.title}</p>

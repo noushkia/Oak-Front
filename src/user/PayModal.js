@@ -50,6 +50,8 @@ function PayModal(props) {
         });
     };
 
+    const buyListItems = Array.isArray(props.buyList.items) ? props.buyList.items : Object.values(props.buyList.items);
+
     return (
         <Fragment>
             <div className="row d-flex justify-content-center">
@@ -63,7 +65,7 @@ function PayModal(props) {
                     </Modal.Header>
                     <Modal.Body>
                         <ul>
-                            {props.buyList.items.map((item) => (
+                            {buyListItems.map((item) => (
                                 <li>{item.name} {item.price}$</li>
                             ))}
                         </ul>

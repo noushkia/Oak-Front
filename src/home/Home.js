@@ -52,12 +52,14 @@ function FilterBar(props) {
 
 
 function Commodities(props) {
+    const commodityItems = Array.isArray(props.buyList.items) ? props.buyList.items : Object.values(props.buyList.items);
+
     return (
         <Fragment>
             <div className="container home">
                 <div className="row my-4 no-gutters no-wrap-row justify-content-center">
-                    {props.commodities.map((commodity, index) => (
-                        <Card card={commodity} index={index}
+                    {commodityItems.map((commodity, index) => (
+                        <Card card={commodity} index={index} key={commodity.id}
                               inCart={getInCart(commodity.id, props.buyList.itemsCount)}/>
                     ))}
                 </div>
@@ -73,6 +75,7 @@ function Home(props) {
     const [sortingAttribute, setSortingAttribute] = useState("");
 
     useEffect(() => {
+        document.title = 'Home';
         const params = new URLSearchParams(location.search);
         const type = params.get("type") || "";
         const query = params.get("query") || "";

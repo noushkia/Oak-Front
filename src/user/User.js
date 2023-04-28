@@ -12,25 +12,25 @@ function Profile(props) {
                 <div className="col-lg-6 col-md-12">
                     <div className="row">
                         <img src="../assets/images/svg/user/user.svg" alt="user"/>
-                        <p>{props.user.username}</p>
+                        <p>{props.currUser.username}</p>
                     </div>
                     <div className="row">
                         <img src="../assets/images/svg/user/mail.svg" alt="mail"/>
-                        <p>{props.user.email}</p>
+                        <p>{props.currUser.email}</p>
                     </div>
                     <div className="row">
                         <img src="../assets/images/svg/user/calendar.svg" alt="calendar"/>
-                        <p>{props.user.birthDate}</p>
+                        <p>{props.currUser.birthDate}</p>
                     </div>
                     <div className="row">
                         <img src="../assets/images/svg/user/location.svg" alt="location"/>
-                        <p>{props.user.address}</p>
+                        <p>{props.currUser.address}</p>
                     </div>
                     <LogoutModal setLoggedIn={props.setLoggedIn}/>
                 </div>
                 <div className="col-lg-6 col-md-12 credit">
                     <div className="row">
-                        <p className="amount">{props.user.credit}</p>
+                        <p className="amount">{props.currUser.credit}</p>
                     </div>
                     <AddCreditModal/>
                 </div>
@@ -78,6 +78,8 @@ function CommodityRow({item, showCart}) {
 }
 
 function Cart(props) {
+    const cartItems = Array.isArray(props.cart.items) ? props.cart.items : Object.values(props.cart.items);
+
     return (
         <Fragment>
             <div className="container cart" id="cart">
@@ -101,7 +103,7 @@ function Cart(props) {
                         </tr>
                         </thead>
                         <tbody className="table-body">
-                        {props.cart.map((item) => (
+                        {cartItems.map((item) => (
                             <CommodityRow key={item.id} item={item} showCart={true}/>
                         ))}
                         </tbody>
@@ -115,6 +117,8 @@ function Cart(props) {
 }
 
 function History(props) {
+    const historyItems = Array.isArray(props.history.items) ? props.history.items : Object.values(props.history.items);
+
     return (
         <Fragment>
             <div className="container history" id="history">
@@ -138,7 +142,7 @@ function History(props) {
                         </tr>
                         </thead>
                         <tbody className="table-body">
-                        {props.history.map((item) => (
+                        {historyItems.map((item) => (
                             <CommodityRow key={item.id} item={item} showCart={false}/>
                         ))}
                         </tbody>
@@ -158,9 +162,9 @@ function User(props) {
 
     return (
         <Fragment>
-            <Profile user={props.user} setLoggedIn={props.setLoggedIn}/>
-            <Cart cart={props.user.buyList}/>
-            <History history={props.user.purchasedList}/>
+            <Profile currUser={props.currUser} setLoggedIn={props.setLoggedIn}/>
+            <Cart cart={props.currUser.buyList}/>
+            <History history={props.currUser.purchasedList}/>
         </Fragment>
     )
 }

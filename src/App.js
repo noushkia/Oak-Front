@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import {toast, ToastContainer} from "react-toastify";
 import {Spinner} from "react-bootstrap";
 import {Fragment, useEffect, useState} from "react";
@@ -21,12 +21,12 @@ function App() {
         <Routes>
             <Route path='/user' element={<User currUser={currUser} setLoggedIn={setLoggedIn}/>}/>
             <Route path='/home' element={<Home buyList={currUser.buyList}/>}/>
-            <Route path='/' element={<Home buyList={currUser.buyList}/>}/>
+            <Route path='/' element={<Navigate to='/home'/>}/>
         </Routes>
     )
 
+    const username = getUsername();
     useEffect(() => {
-        const username = getUsername();
         if (username !== '') {
             setLoggedIn(true);
             setLoading(true);
@@ -42,7 +42,7 @@ function App() {
                     setLoading(false);
                 });
         }
-    }, [getUsername()]);
+    }, [username]);
 
     return (
         <Router>
