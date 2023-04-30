@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Navigate, Route, Routes,} from 'react-router-dom';
 import {toast, ToastContainer} from "react-toastify";
 import {Spinner} from "react-bootstrap";
 import {Fragment, useEffect, useState} from "react";
@@ -8,6 +8,7 @@ import Auth from "./auth/Auth";
 import NavBar from "./general/navbar/NavBar";
 import Footer from "./general/footer/Footer";
 import User from "./user/User";
+import Commodity from "./commodity/Commodity";
 import Home from "./home/Home";
 import {getUsername} from "./utils/Session";
 import {getUser} from "./utils/api/Users";
@@ -21,7 +22,9 @@ function App() {
 
     const protectedRoutes = (
         <Routes>
-            <Route path={`/users/${currUser.username}`} element={<User currUser={currUser} setLoggedIn={setLoggedIn} setCurrUser={setCurrUser}/>}/>
+            <Route path={`/users/${currUser.username}`}
+                   element={<User currUser={currUser} setLoggedIn={setLoggedIn} setCurrUser={setCurrUser}/>}/>
+            <Route path="/commodities/:commodityId" element={<Commodity setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
             <Route path='/home' element={<Home buyList={currUser.buyList} setCurrUser={setCurrUser}/>}/>
             <Route path='/' element={<Navigate to='/home'/>}/>
         </Routes>

@@ -1,10 +1,16 @@
 import "./commodity.css"
 import {Fragment, useEffect} from "react";
-import CommodityModal from "./CategoriesModal";
+import CategoriesModal from "./CategoriesModal";
 import React, {useState} from 'react';
 import {toast} from "react-toastify";
-import {addComment, addUserRating, voteComment} from "../utils/api/Commodities";
+import {addComment, addUserRating, getCommodity, voteComment} from "../utils/api/Commodities";
 import Card from "../general/card/Card";
+import {getInCart} from "../utils/Cart";
+import {useParams} from "react-router-dom";
+import {Spinner} from "react-bootstrap";
+import AddToCartButton from "../general/card/AddToCartButton";
+import {Carousel} from 'react-bootstrap';
+
 
 function Rate() {
     const [rating, setRating] = useState(null);
@@ -74,19 +80,19 @@ function CommodityInfo(props) {
         return (
             <div className="category">
                 <div className="row">
-                    <p>by <a href="#">{props.providerId}</a></p> todo: get provider name by id
+                    <p>by <a href="#">{props.providerId}</a></p> {/*todo: get provider name by id*/}
                 </div>
                 <div className="row">
                     <p>Categories</p>
                 </div>
                 <div className="row">
                     <ul className="list">
-                        {props.categories.map((category, index) => (
+                        {props.categories.slice(0, 2).map((category, index) => (
                             <li key={index}>{category}</li>
                         ))}
+                        {props.categories.length > 2 && <CategoriesModal categories={props.categories}/>}
                     </ul>
                 </div>
-                <CommodityModal categories={props.categories}/>
             </div>
         )
     }
@@ -95,7 +101,7 @@ function CommodityInfo(props) {
         <Fragment>
             <div className="row">
                 <div className="col-lg-6 col-md-12">
-                    <img className="image" src={props.commodity.img} alt="commodity"/>
+                    <img className="image" src="../assets/images/svg/others/chestnut.svg" alt="commodity"/>
                 </div>
                 <div className="col-lg-6 col-md-12">
                     <div className="row">
@@ -107,19 +113,22 @@ function CommodityInfo(props) {
                             <img className="star" src="../assets/images/svg/commodity/star.svg" alt="Star"/>
                             <p className="mb-0 ml-2 text">
                                 <span>{props.commodity.rating}</span>
-                                <span>({props.commodity.count})</span> todo: get the number of ratings
+                                <span>({props.commodity.ratings})</span>
                             </p>
                         </div>
                     </div>
                     <Categories providerId={props.commodity.providerId} categories={props.commodity.categories}/>
-                    {/*todo: get categories*/}
                     <div className="row buy d-flex align-items-center">
                         <div className="col-md-6">
-                            <p className="text">{props.commodity.price}</p>
+                            <p className="text">{props.commodity.price}$</p>
                         </div>
                         <div className="col-md-6 d-flex justify-content-end">
-                            <button className="btn" type="button">add to cart</button>
-                            {/*    todo: Handle*/}
+                            <AddToCartButton
+                                inCart={getInCart(props.commodity.id, props.itemsCount)}
+                                id={props.commodity.id}
+                                inStock={props.commodity.inStock}
+                                setCurrUser={props.setCurrUser}
+                            />
                         </div>
                     </div>
                     <Rate/>
@@ -133,7 +142,8 @@ function CommentSection(props) {
     const [newComment, setNewComment] = useState('');
 
     const handleVoteComment = (username, commentId, vote) => {
-        voteComment(username, commentId, vote).then(r => {}); // todo: what to do with the promise?
+        voteComment(username, commentId, vote).then(r => {
+        });
         console.log(`Voted comment: `);
     };
 
@@ -144,7 +154,8 @@ function CommentSection(props) {
     const handleCommentSubmit = (event) => {
         event.preventDefault();
         if (newComment) {
-            addComment(newComment).then(r => {}); // todo: what to do with the promise?
+            addComment(newComment).then(r => {
+            });
             console.log(`Submitted comment: ${newComment}`);
             setNewComment('');
         } else {
@@ -221,6 +232,7 @@ function CommentSection(props) {
     );
 }
 
+
 function Suggestions(props) {
     return (
         <Fragment>
@@ -228,7 +240,10 @@ function Suggestions(props) {
                 <p className="title">You might also like...</p>
                 <div className="row my-4 no-gutters no-wrap-row justify-content-center">
                     {props.suggestions.map((suggestion, index) => (
-                        <Card card={suggestion} index={index} inCart={/*todo: check suggestion in buylist*/}/>
+                        <Card card={suggestion} index={index} key={suggestion.id}
+                              inCart={getInCart(suggestion.id, props.itemsCount)}
+                              setCurrUser={props.setCurrUser}
+                        />
                     ))}
                 </div>
             </div>
@@ -237,21 +252,38 @@ function Suggestions(props) {
 }
 
 function Commodity(props) {
-    useEffect(() => {
-        document.title = props.commodity.name;
-        return () => {
-        };
-    }, []);
+    const {commodityId} = useParams();
+    const [commodity, setCommodity] = useState({commodity: {}, suggestions: []});
+    const [init, setInit] = useState(false);
 
-    return (
-        <Fragment>
-            <div className="container commodity">
-                <CommodityInfo commodity={props.commodity}/>
-                <CommentSection comments={props.commodity.comments}/> todo: get comments
-                <Suggestions suggestions={props.commodity.suggestions}/> todo: get suggestions
-            </div>
-        </Fragment>
-    )
+    useEffect(() => {
+        if (commodityId) {
+            getCommodity(commodityId).then(currCommodity => {
+                setCommodity(currCommodity);
+                setInit(true);
+            })
+        }
+    }, [commodityId]);
+
+    if (!init)
+        return (
+            <Fragment>
+                <div className='text-center'><Spinner animation="border" variant='warning'/></div>
+            </Fragment>
+        )
+    else {
+        return (
+            <Fragment>
+                <div className="container commodity">
+                    <CommodityInfo commodity={commodity.commodity} setCurrUser={props.setCurrUser}
+                                   itemsCount={props.buyList.itemsCount}/>
+                    <CommentSection comments={commodity.commodity.comments}/>
+                    <Suggestions suggestions={commodity.suggestions} setCurrUser={props.setCurrUser}
+                                 itemsCount={props.buyList.itemsCount}/>
+                </div>
+            </Fragment>
+        )
+    }
 }
 
 export default Commodity;

@@ -1,18 +1,19 @@
-import {useState} from 'react';
+import {Fragment, useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
-function CommodityModal(props) {
+function CategoriesModal(props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleOpen = () => setShow(false);
+    const handleOpen = () => setShow(true);
 
     return (
-        <>
-            <div className="row">
-                <Link onClick={handleOpen} to='#'>Show more...</Link>
+        <Fragment>
+            <div className="col-md-6 mt-2">
+                <button className="btn" onClick={handleOpen}>Show more...</button>
             </div>
+
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header>
                     <Modal.Title>Categories</Modal.Title>
@@ -30,8 +31,8 @@ function CommodityModal(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </>
+        </Fragment>
     );
 }
 
-export default CommodityModal;
+export default CategoriesModal;
