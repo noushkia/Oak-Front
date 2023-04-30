@@ -38,9 +38,9 @@
     color: #C82525;
 }
 
-.commodity .rating .star {
-    width: 30px;
-    height: 30px;
+.star {
+    width: 20px;
+    height: 20px;
 }
 
 .commodity .rating .text span:first-child {

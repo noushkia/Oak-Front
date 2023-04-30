@@ -19,7 +19,7 @@ function Card(props) {
             <img
                 className="card-img-top image"
                 src="../../assets/images/svg/commodity/taha.jpg"
-                alt="Card image cap"
+                alt="commodity"
                 onClick={() => handleCardClick(props.card.id)}
                 style={{cursor: "pointer"}}
             />

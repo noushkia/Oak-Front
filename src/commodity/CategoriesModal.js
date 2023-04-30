@@ -1,6 +1,5 @@
 import {Fragment, useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 
 function CategoriesModal(props) {
     const [show, setShow] = useState(false);

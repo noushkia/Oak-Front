@@ -9,11 +9,11 @@ import {getInCart} from "../utils/Cart";
 import {useParams} from "react-router-dom";
 import {Spinner} from "react-bootstrap";
 import AddToCartButton from "../general/card/AddToCartButton";
-import {Carousel} from 'react-bootstrap';
 
 
-function Rate() {
-    const [rating, setRating] = useState(null);
+function Rate(props) {
+    const {commodityId} = useParams();
+    const [rating, setRating] = useState(10);
 
     const handleRatingClick = (value) => {
         setRating(value);
@@ -22,13 +22,12 @@ function Rate() {
     const renderStars = () => {
         const stars = [];
         for (let i = 1; i <= 10; i++) {
-            const filled = rating ? i <= rating : false;
             stars.push(
                 <img
                     key={i}
-                    src="../assets/images/svg/commodity/star.svg"
+                    src={rating >= i ? "../assets/images/svg/commodity/star.svg": "../assets/images/svg/commodity/like.svg"}
                     alt="star"
-                    className={`star ${filled ? 'filled' : ''}`}
+                    className={`star`}
                     onClick={() => handleRatingClick(i)}
                 />
             );
@@ -38,9 +37,9 @@ function Rate() {
 
     const handleSubmit = () => {
         if (rating) {
-            addUserRating(rating)
-                .then(newRating => {
-                    console.log(newRating);
+            addUserRating(commodityId, rating)
+                .then(newCommodity => {
+                    props.setCommodity(newCommodity);
                     console.log('addRating: success!');
                 }).catch(error => {
                 if (error.response) {
@@ -58,17 +57,17 @@ function Rate() {
 
     return (
         <div className="row rate">
-            <div className="col-md-6 d-flex align-items-center">
+            <div className="col-md-10 d-flex align-items-center">
                 <div className="container">
                     <div className="row">
-                        <p>Rate now:</p>
+                        <p>rate now</p>
                         <div className="stars">{renderStars()}</div>
                     </div>
                 </div>
             </div>
-            <div className="col-md-6 d-flex align-items-center justify-content-end">
+            <div className="col-md-2 d-flex align-items-center justify-content-end">
                 <button className="btn" onClick={handleSubmit}>
-                    Submit
+                    submit
                 </button>
             </div>
         </div>
@@ -131,7 +130,7 @@ function CommodityInfo(props) {
                             />
                         </div>
                     </div>
-                    <Rate/>
+                    <Rate setCommodity={props.setCommodity}/>
                 </div>
             </div>
         </Fragment>
@@ -139,11 +138,15 @@ function CommodityInfo(props) {
 }
 
 function CommentSection(props) {
+    const {commodityId} = useParams();
     const [newComment, setNewComment] = useState('');
 
-    const handleVoteComment = (username, commentId, vote) => {
-        voteComment(username, commentId, vote).then(r => {
-        });
+    const handleVoteComment = (commentId, vote) => {
+        voteComment(commodityId, commentId, vote)
+            .then(newCommodity => {
+                props.setCommodity(newCommodity);
+                console.log("voteComment: success!");
+            });
         console.log(`Voted comment: `);
     };
 
@@ -154,8 +157,11 @@ function CommentSection(props) {
     const handleCommentSubmit = (event) => {
         event.preventDefault();
         if (newComment) {
-            addComment(newComment).then(r => {
-            });
+            addComment(commodityId, newComment)
+                .then(newCommodity => {
+                    props.setCommodity(newCommodity);
+                    console.log("submitComment: success!");
+                });
             console.log(`Submitted comment: ${newComment}`);
             setNewComment('');
         } else {
@@ -170,7 +176,7 @@ function CommentSection(props) {
                 <p className="info">
                     <span>{comment.date}</span>
                     <span className="bullet">&#8226;</span>
-                    <span>#{comment.author}</span>
+                    <span>#{comment.userEmail}</span>
                 </p>
                 <div className="d-flex justify-content-end vote">
                     <p>Was this comment helpful?</p>
@@ -179,14 +185,16 @@ function CommentSection(props) {
                         <img
                             src="../assets/images/svg/commodity/like.svg"
                             alt="like"
-                            onClick={() => handleVoteComment(props.username, comment.id, 1)}
+                            onClick={() => handleVoteComment(comment.id, 1)}
+                            style={{cursor: 'pointer'}}
                         />{' '}
                         &nbsp;&nbsp;
                         {comment.dislikes}{' '}
                         <img
                             src="../assets/images/svg/commodity/dislike.svg"
                             alt="dislike"
-                            onClick={() => handleVoteComment(props.username, comment.id, -1)}
+                            onClick={() => handleVoteComment(comment.id, -1)}
+                            style={{cursor: 'pointer'}}
                         />
                     </p>
                 </div>
@@ -238,9 +246,13 @@ function Suggestions(props) {
         <Fragment>
             <div className="container suggestions">
                 <p className="title">You might also like...</p>
-                <div className="row my-4 no-gutters no-wrap-row justify-content-center">
-                    {props.suggestions.map((suggestion, index) => (
-                        <Card card={suggestion} index={index} key={suggestion.id}
+                <div className="row my-4 no-wrap-row justify-content-center">
+                    {/*{instead of choosing 4 you can use a carousel: https://codepen.io/mephysto/pen/ZYVKRY}*/}
+                    {/*todo fix the overflow*/}
+                    {props.suggestions.slice(0, 4).map((suggestion, index) => (
+                        <Card card={suggestion}
+                              index={index}
+                              key={suggestion.id}
                               inCart={getInCart(suggestion.id, props.itemsCount)}
                               setCurrUser={props.setCurrUser}
                         />
@@ -259,6 +271,7 @@ function Commodity(props) {
     useEffect(() => {
         if (commodityId) {
             getCommodity(commodityId).then(currCommodity => {
+                document.title = currCommodity.commodity.name;
                 setCommodity(currCommodity);
                 setInit(true);
             })
@@ -276,8 +289,8 @@ function Commodity(props) {
             <Fragment>
                 <div className="container commodity">
                     <CommodityInfo commodity={commodity.commodity} setCurrUser={props.setCurrUser}
-                                   itemsCount={props.buyList.itemsCount}/>
-                    <CommentSection comments={commodity.commodity.comments}/>
+                                   itemsCount={props.buyList.itemsCount} setCommodity={setCommodity}/>
+                    <CommentSection comments={commodity.commodity.comments} setCommodity={setCommodity}/>
                     <Suggestions suggestions={commodity.suggestions} setCurrUser={props.setCurrUser}
                                  itemsCount={props.buyList.itemsCount}/>
                 </div>
