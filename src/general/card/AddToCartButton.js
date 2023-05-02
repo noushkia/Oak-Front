@@ -50,10 +50,11 @@ function AddToCartButton(props) {
                             className="btn"
                             type="button"
                             onClick={() => handleCartUpdate(props.id, -1)}
+                            style={{borderRight: "none"}}
                         >
                             -
                         </button>
-                        <button className="btn" type="button" disabled>
+                        <button className="btn" type="button" disabled style={{borderRadius: "0", borderLeft: "none"}}>
                             {props.inCart}
                         </button>
                         <button
@@ -61,6 +62,7 @@ function AddToCartButton(props) {
                             type="button"
                             onClick={() => handleCartUpdate(props.id, 1)}
                             disabled={props.inCart === props.inStock}
+                            style={{borderBottomLeftRadius: "0", borderTopLeftRadius: "0", borderLeft: "none"}}
                         >
                             +
                         </button>

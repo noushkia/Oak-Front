@@ -6,7 +6,7 @@
     color: #593C1C;
 }
 
-.commodity .btn {
+.commodity ~card .btn {
     border-radius: 10px;
 
     background: #593C1C;
