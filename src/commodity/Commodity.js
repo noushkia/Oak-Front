@@ -285,8 +285,6 @@ function Commodity(props) {
             </Fragment>
         )
     else {
-        console.log(commodity.commodity.name);
-        console.log(commodity.suggestions);
         return (
             <Fragment>
                 <div className="container commodity">

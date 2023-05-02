@@ -67,7 +67,7 @@ function NavBar(props) {
                 <Link className="text" to={`/users/${props.currUser.username}`}>
                     #{props.currUser.username}
                 </Link>
-                <Button className="btn cart" type="button" onClick={handleCartClick}>
+                <Button className={`btn cart ${Object.keys(props.currUser.buyList.items).length === 0 ? 'empty' : ''}`} type="button" onClick={handleCartClick}>
                     <span>Cart</span>
                     <span>{Object.keys(props.currUser.buyList.items).length}</span>
                 </Button>
