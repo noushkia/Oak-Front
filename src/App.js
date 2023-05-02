@@ -12,6 +12,7 @@ import Commodity from "./commodity/Commodity";
 import Home from "./home/Home";
 import {getUsername} from "./utils/Session";
 import {getUser} from "./utils/api/Users";
+import Provider from "./provider/Provider";
 
 function App() {
     const [currUser, setCurrUser] = useState({});
@@ -25,6 +26,7 @@ function App() {
             <Route path={`/users/${currUser.username}`}
                    element={<User currUser={currUser} setLoggedIn={setLoggedIn} setCurrUser={setCurrUser}/>}/>
             <Route path="/commodities/:commodityId" element={<Commodity setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
+            <Route path={"/providers/:providerId" } element={<Provider setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
             <Route path='/home' element={<Home buyList={currUser.buyList} setCurrUser={setCurrUser}/>}/>
             <Route path='/' element={<Navigate to='/home'/>}/>
         </Routes>

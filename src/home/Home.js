@@ -2,12 +2,11 @@ import React, {Fragment, useEffect, useState} from "react";
 import "./home.css";
 import "./filter.css";
 import "./pagination.css";
-import Card from "../general/card/Card";
-import {getInCart} from "../utils/Cart";
 import {getCommodities} from "../utils/api/Commodities";
 import {useLocation} from "react-router-dom";
 import {toast} from "react-toastify";
 import ReactPaginate from 'react-paginate';
+import Commodities from "../general/commodities/Commodities";
 
 
 function FilterBar(props) {
@@ -52,27 +51,6 @@ function FilterBar(props) {
             </div>
         </div>
     );
-}
-
-
-function Commodities(props) {
-    return (
-        <Fragment>
-            <div className="container home">
-                <div className="row justify-content-center">
-                    {
-                        props.commodities.map((commodity, index) => (
-                            <Card
-                                card={commodity} index={index} key={commodity.id}
-                                inCart={getInCart(commodity.id, props.itemsCount)}
-                                setCurrUser={props.setCurrUser}
-                            />
-                        ))
-                    }
-                </div>
-            </div>
-        </Fragment>
-    )
 }
 
 function Home(props) {

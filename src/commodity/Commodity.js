@@ -6,7 +6,7 @@ import {toast} from "react-toastify";
 import {addComment, addUserRating, getCommodity, voteComment} from "../utils/api/Commodities";
 import Card from "../general/card/Card";
 import {getInCart} from "../utils/Cart";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Spinner} from "react-bootstrap";
 import AddToCartButton from "../general/card/AddToCartButton";
 
@@ -25,7 +25,7 @@ function Rate(props) {
             stars.push(
                 <img
                     key={i}
-                    src={rating >= i ? "../assets/images/svg/commodity/star.svg": "../assets/images/svg/commodity/like.svg"}
+                    src={rating >= i ? "../assets/images/svg/commodity/star.svg" : "../assets/images/svg/commodity/like.svg"}
                     alt="star"
                     className={`star`}
                     onClick={() => handleRatingClick(i)}
@@ -74,28 +74,34 @@ function Rate(props) {
     );
 }
 
-function CommodityInfo(props) {
-    function Categories(props) {
-        return (
-            <div className="category">
-                <div className="row">
-                    <p>by <a href="#">{props.providerId}</a></p> {/*todo: get provider name by id*/}
-                </div>
-                <div className="row">
-                    <p>Categories</p>
-                </div>
-                <div className="row">
-                    <ul className="list">
-                        {props.categories.slice(0, 2).map((category, index) => (
-                            <li key={index}>{category}</li>
-                        ))}
-                        {props.categories.length > 2 && <CategoriesModal categories={props.categories}/>}
-                    </ul>
-                </div>
-            </div>
-        )
-    }
+function Categories(props) {
+    const navigate = useNavigate();
 
+    const handleProviderClick = () => {
+        navigate(`/providers/${props.providerId}`);
+    };
+
+    return (
+        <div className="category">
+            <div className="row">
+                <p>by <a href="" onClick={handleProviderClick}>{props.providerName}</a></p>
+            </div>
+            <div className="row">
+                <p>Categories</p>
+            </div>
+            <div className="row">
+                <ul className="list">
+                    {props.categories.slice(0, 2).map((category, index) => (
+                        <li key={index}>{category}</li>
+                    ))}
+                    {props.categories.length > 2 && <CategoriesModal categories={props.categories}/>}
+                </ul>
+            </div>
+        </div>
+    )
+}
+
+function CommodityInfo(props) {
     return (
         <Fragment>
             <div className="row">
@@ -116,7 +122,8 @@ function CommodityInfo(props) {
                             </p>
                         </div>
                     </div>
-                    <Categories providerId={props.commodity.providerId} categories={props.commodity.categories}/>
+                    <Categories providerName={props.providerName} providerId={props.commodity.providerId}
+                                categories={props.commodity.categories}/>
                     <div className="row buy d-flex align-items-center">
                         <div className="col-md-6">
                             <p className="text">{props.commodity.price}$</p>
@@ -248,7 +255,6 @@ function Suggestions(props) {
                 <p className="title">You might also like...</p>
                 <div className="row my-4 no-wrap-row justify-content-center">
                     {/*{instead of choosing 4 you can use a carousel: https://codepen.io/mephysto/pen/ZYVKRY}*/}
-                    {/*todo fix the overflow*/}
                     {props.suggestions.slice(0, 4).map((suggestion, index) => (
                         <Card card={suggestion}
                               index={index}
@@ -288,8 +294,12 @@ function Commodity(props) {
         return (
             <Fragment>
                 <div className="container commodity">
-                    <CommodityInfo commodity={commodity.commodity} setCurrUser={props.setCurrUser}
-                                   itemsCount={props.buyList.itemsCount} setCommodity={setCommodity}/>
+                    <CommodityInfo commodity={commodity.commodity}
+                                   setCurrUser={props.setCurrUser}
+                                   itemsCount={props.buyList.itemsCount}
+                                   setCommodity={setCommodity}
+                                   providerName={commodity.providerName}
+                    />
                     <CommentSection comments={commodity.commodity.comments} setCommodity={setCommodity}/>
                     <Suggestions suggestions={commodity.suggestions} setCurrUser={props.setCurrUser}
                                  itemsCount={props.buyList.itemsCount}/>
