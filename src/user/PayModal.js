@@ -10,6 +10,7 @@ function PayModal(props) {
     const [discountCode, setDiscountCode] = useState("");
     const [loading, setLoading] = useState(false);
     const [discountLoading, setDiscountLoading] = useState(false);
+    const [discountAdded, setDiscountAdded] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
@@ -20,9 +21,11 @@ function PayModal(props) {
 
     const handleAddDiscount = () => {
         setDiscountLoading(true);
-        addDiscount(discountCode)
+        const body = {code: discountCode};
+        addDiscount(body)
             .then(user => {
                 props.setCurrUser(user);
+                setDiscountAdded(true);
                 console.log('AddDiscount: success!');
             }).catch(error => {
             if (error.response) {
@@ -94,7 +97,15 @@ function PayModal(props) {
                             {discountLoading ?
                                 <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'submit'}
                         </Button>
-                        <p>total: {props.buyList.total}$</p>
+                        {
+                            discountAdded ?
+                                <>
+                                    <p style={{textDecoration: "line-through"}}>total: {props.buyList.total}$</p>
+                                    <p>with discount: {props.buyList.final}$</p>
+                                </>
+                                :
+                                <p>total: {props.buyList.total}$</p>
+                        }
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="outline-dark" onClick={handleClose}>
