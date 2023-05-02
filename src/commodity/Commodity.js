@@ -100,7 +100,7 @@ function CommodityInfo(props) {
         <Fragment>
             <div className="row">
                 <div className="col-lg-6 col-md-12">
-                    <img className="image" src="../assets/images/svg/others/chestnut.svg" alt="commodity"/>
+                    <img className="image" src={props.commodity.image} alt="commodity"/>
                 </div>
                 <div className="col-lg-6 col-md-12">
                     <div className="row">
@@ -285,6 +285,8 @@ function Commodity(props) {
             </Fragment>
         )
     else {
+        console.log(commodity.commodity.name);
+        console.log(commodity.suggestions);
         return (
             <Fragment>
                 <div className="container commodity">

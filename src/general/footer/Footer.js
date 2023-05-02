@@ -4,7 +4,7 @@ import expressDeliveryImg from "../../assets/images/svg/footer/express-delivery.
 import cashOnDeliveryImg from "../../assets/images/svg/footer/cash-on-delivery.svg";
 import daysReturnImg from "../../assets/images/svg/footer/days-return.svg";
 import originalProductsImg from "../../assets/images/svg/footer/original-products.svg";
-import supportImg from "../../assets/images/svg/footer/original-products.svg";
+import supportImg from "../../assets/images/svg/footer/support.svg";
 
 function Footer() {
     const footerItems = [

@@ -18,9 +18,13 @@ function Card(props) {
             <h6 className="in_stock">{props.card.inStock} left in stock</h6>
             <img
                 className="card-img-top image"
-                src="../../assets/images/svg/commodity/taha.jpg"
+                src={props.card.image}
                 alt="commodity"
                 onClick={() => handleCardClick(props.card.id)}
+                onError={(e) => {
+                    e.target.onerror = null; // prevent infinite loop
+                    e.target.src = "../../assets/images/svg/others/chestnut.svg"; // set fallback image URL
+                }}
                 style={{cursor: "pointer"}}
             />
             <div className="card-body d-flex justify-content-between">
