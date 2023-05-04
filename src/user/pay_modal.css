@@ -1,0 +1,74 @@
+.pay .modal-content {
+    width: 90%;
+    justify-self: center;
+    font-family: 'Inter', cursive;
+    font-style: normal;
+}
+
+.pay .title {
+    font-weight: 400;
+    font-size: 28px;
+    text-align: center;
+    color: #000000;
+}
+
+.pay p,
+.pay .discount-input {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pay li span:first-child {
+    font-weight: 500;
+    font-style: normal;
+    color: #593C1C;
+}
+
+.pay li span:last-child {
+    font-style: normal;
+    color: #A97B47;
+    float: right;
+}
+
+.pay .submitted-btn {
+    background: #D8C1A8;
+    mix-blend-mode: normal;
+    border: none;
+}
+
+.pay .total {
+    font-weight: 500;
+    line-height: 29px;
+    color: #593C1C;
+}
+
+.pay .total.no-discount span:last-child,
+.pay .final span:last-child {
+    font-weight: 600;
+    line-height: 29px;
+    color: #C82525;
+}
+
+.pay .total.discount span:last-child {
+    font-style: normal;
+    color: #A97B47;
+    text-decoration: line-through;
+}
+
+.pay .close-btn {
+    background: none;
+    box-shadow: none;
+    border: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 29px;
+    text-align: center;
+    color: #C82525;
+}
+
+.pay .buy-btn {
+    width: 30%;
+    font-weight: 600;
+    font-size: 22px;
+    text-align: center;
+}

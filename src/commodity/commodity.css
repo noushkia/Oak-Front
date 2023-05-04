@@ -1,0 +1,180 @@
+.commodity {
+    font-family: Inter, cursive;
+    font-style: normal;
+    font-weight: 600;
+
+    color: #593C1C;
+}
+
+.commodity ~card .btn {
+    border-radius: 10px;
+
+    background: #593C1C;
+    mix-blend-mode: normal;
+
+    font-weight: 500;
+    font-size: 16px;
+
+    text-align: center;
+
+    color: #F7F0E9;
+}
+
+.commodity p, .commodity a {
+    font-size: 14px;
+}
+
+.commodity .image {
+    width: 100%;
+    height: 100%;
+}
+
+.commodity .title {
+    font-size: 44px;
+    line-height: 40px;
+}
+
+.commodity .in_stock {
+    color: #C82525;
+}
+
+.star {
+    width: 20px;
+    height: 20px;
+}
+
+.commodity .rating .text span:first-child {
+    font-size: 18px;
+}
+
+.commodity .rating .text span:last-child {
+    font-size: 10px;
+    opacity: 0.5;
+}
+
+.category {
+    font-weight: 500;
+}
+
+.category .more {
+    font-weight: 400;
+
+    color: #A97B47;
+}
+
+.commodity .buy {
+    background: #FFFFFF;
+
+    box-shadow: 0 4px 4px rgba(208, 208, 208, 0.25);
+
+    margin-top: 8%
+}
+
+.commodity .buy .text {
+    font-size: 22px;
+    padding: 5px;
+}
+
+.commodity .buy .btn {
+    box-sizing: border-box;
+
+    width: 45%;
+    height: 100%;
+
+    background: #FFFFFF;
+    border: 1px solid #593C1C;
+    border-radius: 10px;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+
+    padding: 10px;
+
+    color: #593C1C;
+}
+
+.commodity .rate {
+    margin-top: 5%;
+
+    font-size: 14px;
+
+    color: #000000;
+}
+
+.commodity .comment .title {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+
+    color: #593C1C;
+}
+
+.commodity .comment .title span:last-child {
+    opacity: 0.5;
+}
+
+.commodity .comment .text {
+    font-weight: 600;
+    font-size: 18px;
+
+    color: #593C1C;
+}
+
+.commodity .comment .info {
+    display: flex;
+    align-items: center;
+
+    font-weight: 500;
+    font-size: 10px;
+
+    color: #919191;
+}
+
+.commodity .comment .info span {
+    margin: 0 5px;
+}
+
+.commodity .comment .info .bullet {
+    margin: 0 15px;
+}
+
+.commodity .comment .vote {
+    font-weight: 500;
+    font-size: 11px;
+
+    color: #593C1C;
+}
+
+.commodity .comment .vote img {
+    width: 20px;
+    height: 20px;
+}
+
+.commodity .comment .submit {
+    font-weight: 500;
+    font-size: 16px;
+
+    color: #593C1C;
+}
+
+.commodity .comment .new-comment {
+    background: #F5F5F5;
+    border-radius: 10px;
+}
+
+.suggestions {
+    font-family: Inter, cursive;
+    font-style: normal;
+    font-weight: 600;
+
+    color: #593C1C;
+}
+
+.suggestions .title {
+    font-size: 22px;
+    line-height: 22px;
+
+    margin-left: -3%;
+}
