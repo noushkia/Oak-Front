@@ -3,6 +3,7 @@ import {Button, Modal, Spinner} from 'react-bootstrap';
 import {addDiscount, buy} from "../utils/api/Users";
 import {toast} from "react-toastify";
 import {getInCart} from "../utils/Cart";
+import "./pay_modal.css"
 
 
 function PayModal(props) {
@@ -67,51 +68,59 @@ function PayModal(props) {
                     <button className="btn pay" onClick={handleOpen}>Pay Now!</button>
                 </div>
 
-                <Modal show={show} onHide={handleClose}>
+                <Modal show={show} onHide={handleClose} className={"pay"}>
                     <Modal.Header>
-                        <Modal.Title>Your cart</Modal.Title>
+                        <Modal.Title className={"title"}>Your cart</Modal.Title>
                     </Modal.Header>
                     <Modal.Body style={{padding: "30px"}}>
                         <ul>
-                            <ul>
-                                {buyListItems.map(({id, name, price}) => {
-                                    const itemCount = getInCart(id, props.buyList.itemsCount)
-                                    const itemTotal = price * itemCount
-
-                                    return (
-                                        <li key={name} style={{display: 'flex', justifyContent: 'space-between'}}>
-                                            <span>{name} x{itemCount}</span>
-                                            <span>{itemTotal}$</span>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
+                            {buyListItems.map(({id, name, price}) => {
+                                const itemCount = getInCart(id, props.buyList.itemsCount)
+                                const itemTotal = price * itemCount
+                                return (
+                                    <li key={id}>
+                                        <span>{name} x{itemCount}</span>
+                                        <span>{itemTotal}$</span>
+                                    </li>
+                                )
+                            })}
                         </ul>
-                        <input
-                            type="text"
-                            id="discountCode"
-                            value={discountCode}
-                            onChange={handleDiscountCodeChange}
-                        />
-                        <Button variant="dark" onClick={handleAddDiscount}>
-                            {discountLoading ?
-                                <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'submit'}
-                        </Button>
+                        <div className={'discount-input'}>
+                            <input
+                                type="text"
+                                id="discountCode"
+                                value={discountCode}
+                                onChange={handleDiscountCodeChange}
+                            />
+                            <Button variant="dark" onClick={handleAddDiscount}
+                                    className={discountAdded ? 'submitted-btn' : ''}
+                                    disabled={discountAdded}
+                            >
+                                {discountLoading ?
+                                    <Spinner as='span' size='sm-1' role='status' animation="border"/>
+                                    : discountAdded ? 'submitted'
+                                        : 'submit'}
+                            </Button>
+                        </div>
+                        <br/>
                         {
                             discountAdded ?
                                 <>
-                                    <p style={{textDecoration: "line-through"}}>total: {props.buyList.total}$</p>
-                                    <p>with discount: {props.buyList.final}$</p>
+                                    <p className={"total discount"}><span>total</span>
+                                        <span>{props.buyList.total}$</span></p>
+                                    <p className={"final"}><span>with discount</span>
+                                        <span>{props.buyList.final}$</span></p>
                                 </>
                                 :
-                                <p>total: {props.buyList.total}$</p>
+                                <p className={"total no-discount"}><span>total</span>
+                                    <span>{props.buyList.total}$</span></p>
                         }
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="outline-dark" onClick={handleClose}>
+                        <Button className={"close-btn"} onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="success" onClick={handleBuy}>
+                        <Button className={"buy-btn"} onClick={handleBuy}>
                             {loading ? <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'Buy!'}
                         </Button>
                     </Modal.Footer>
