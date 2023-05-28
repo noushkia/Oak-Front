@@ -85,7 +85,7 @@ function SignUp(props) {
                         </div>
                         <div className="form-group mt-2">
                             <input required={true} type="text" name="address" className="form-style"
-                                   placeholder="Your Birth Date" id="logaddress"
+                                   placeholder="Your Address" id="logaddress"
                                    onChange={e => setAddress(e.target.value)}/>
                             <img className="input-icon" src="/assets/images/svg/user/location.svg" alt=""/>
                         </div>

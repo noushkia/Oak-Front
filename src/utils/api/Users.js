@@ -7,7 +7,7 @@ export async function loginUser(body) {
 }
 
 export async function signUpUser(body) {
-    return (await axios.post('http://localhost:8080/api/users', body)).data;
+    return (await axios.post('http://localhost:8080/api/users/signUp', body)).data;
 }
 
 export async function getUser(username) {
