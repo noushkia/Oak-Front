@@ -23,9 +23,25 @@ function SignUp(props) {
         }; // cleanup function
     }, []);
 
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
     function signUp(e) {
         e.preventDefault();
         setLoading(true);
+
+        if (!username || !email || !password || !birthDate || !address) {
+            setLoading(false);
+            return toast.error('Please fill in all required fields');
+        }
+
+        if (!isValidEmail(email)) {
+            setLoading(false);
+            return toast.error('Please enter a valid email address');
+        }
+
         const formData = {
             username,
             email,
