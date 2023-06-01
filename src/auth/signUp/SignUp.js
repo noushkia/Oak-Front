@@ -5,10 +5,9 @@ import {signUpUser} from "../../utils/api/Users";
 import {toast} from "react-toastify";
 import {Spinner} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {saveUsername} from "../../utils/Session";
 
 
-function SignUp(props) {
+function SignUp() {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");

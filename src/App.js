@@ -33,6 +33,7 @@ function App() {
     )
 
     useEffect(() => {
+        console.log(username);
         if (username !== '') {
             setLoggedIn(true);
             setLoading(true);
