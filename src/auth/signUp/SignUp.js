@@ -50,11 +50,9 @@ function SignUp(props) {
             address,
         };
         signUpUser(formData)
-            .then(user => {
-                saveUsername(username);
-                props.setLoggedIn(true);
+            .then(_ => {
                 console.log('SignUp: success!');
-                navigate("/home");
+                navigate("/login");
             })
             .catch(error => {
                     if (error.response) {
