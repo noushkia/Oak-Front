@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
-import {removeJWT, removeUsername} from "../utils/Session";
+import {removeJWT} from "../utils/Session";
 
 function LogoutModal(props) {
     const [show, setShow] = useState(false);
@@ -12,7 +12,6 @@ function LogoutModal(props) {
     };
 
     const handleLogout = () => {
-        removeUsername();
         removeJWT();
         handleClose();
         props.setLoggedIn(false);

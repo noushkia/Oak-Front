@@ -5,7 +5,7 @@ import {Spinner} from "react-bootstrap";
 import {toast} from "react-toastify";
 import {loginUser} from "../../utils/api/Users";
 import {useNavigate} from "react-router-dom";
-import {saveJWT, saveUsername} from "../../utils/Session";
+import {saveJWT} from "../../utils/Session";
 
 function Login(props) {
     const navigate = useNavigate();
@@ -29,7 +29,6 @@ function Login(props) {
         loginUser(formData)
             .then(jwt => {
                 saveJWT(jwt)
-                saveUsername(username);
                 props.setLoggedIn(true);
                 console.log('Login: success!');
                 navigate("/home");

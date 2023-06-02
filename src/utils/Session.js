@@ -1,15 +1,3 @@
-export function getUsername() {
-    return localStorage.getItem('username');
-}
-
-export function saveUsername(username) {
-    localStorage.setItem('username', username);
-}
-
-export function removeUsername() {
-    localStorage.removeItem('username');
-}
-
 export function getJWT() {
     return localStorage.getItem('jwt');
 }
@@ -27,5 +15,5 @@ export function getAuthHeader() {
     if (jwt == null)
         return {};
     else
-        return {'headers': {'Authorization': `${jwt}`}};
+        return {'headers': {'Authorization': `Bearer ${jwt}`}};
 }

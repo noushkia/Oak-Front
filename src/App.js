@@ -10,7 +10,7 @@ import Footer from "./general/footer/Footer";
 import User from "./user/User";
 import Commodity from "./commodity/Commodity";
 import Home from "./home/Home";
-import {getUsername} from "./utils/Session";
+import {getJWT} from "./utils/Session";
 import {getUser} from "./utils/api/Users";
 import Provider from "./provider/Provider";
 
@@ -19,11 +19,11 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const username = getUsername();
+    const jwt = getJWT();
 
     const protectedRoutes = (
         <Routes>
-            <Route path={`/users/${currUser.username}`}
+            <Route path={`/users`}
                    element={<User currUser={currUser} setLoggedIn={setLoggedIn} setCurrUser={setCurrUser}/>}/>
             <Route path="/commodities/:commodityId" element={<Commodity setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
             <Route path={"/providers/:providerId" } element={<Provider setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
@@ -33,11 +33,11 @@ function App() {
     )
 
     useEffect(() => {
-        console.log(username);
-        if (username !== '') {
+        if (getJWT() !== null) {
             setLoggedIn(true);
             setLoading(true);
-            getUser(username)
+            console.log(getJWT());
+            getUser()
                 .then((currUser) => {
                     setCurrUser(currUser);
                     setLoggedIn(true);
@@ -49,7 +49,7 @@ function App() {
                     setLoading(false);
                 });
         }
-    }, [username]);
+    }, [jwt]);
 
     return (
         <Router>

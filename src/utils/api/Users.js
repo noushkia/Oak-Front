@@ -10,8 +10,7 @@ export async function signUpUser(body) {
     return (await axios.post('http://localhost:8080/api/users/signUp', body)).data;
 }
 
-export async function getUser(username) {
-    console.log("getting user " + username);
+export async function getUser() {
     return (await axios.get('http://localhost:8080/api/users', getAuthHeader())).data;
 }
 

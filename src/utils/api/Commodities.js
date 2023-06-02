@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getAuthHeader, getUsername} from "../Session";
+import {getAuthHeader} from "../Session";
 
 export async function getCommodity(id) {
     return (await axios.get('http://localhost:8080/api/commodities/' + id, getAuthHeader())).data;
@@ -7,7 +7,6 @@ export async function getCommodity(id) {
 
 export async function addUserRating(id, rating) {
     const formData = {
-        username: getUsername(),
         rating: rating
     }
     return (await axios.post(`http://localhost:8080/api/commodities/${id}`, formData, getAuthHeader())).data;
@@ -15,7 +14,6 @@ export async function addUserRating(id, rating) {
 
 export async function addComment(id, text) {
     const formData = {
-        username: getUsername(),
         text: text,
         date: new Date().toISOString()
     }
@@ -24,7 +22,6 @@ export async function addComment(id, text) {
 
 export async function voteComment(id, commentId, vote) {
     const formData = {
-        username: getUsername(),
         vote: vote
     }
     return (await axios.post(`http://localhost:8080/api/commodities/${id}/comments/${commentId}/vote`, formData, getAuthHeader())).data;
