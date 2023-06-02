@@ -1,25 +1,16 @@
 import "./auth.css";
 import "../general/style.css"
 
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import Login from "./login/Login";
 import SignUp from "./signUp/SignUp";
-import {useNavigate} from "react-router-dom";
 
 function Auth(props) {
     const [isLogin, setIsLogin] = useState(true);
-    const navigate = useNavigate();
 
     const handleCheckboxChange = () => {
         setIsLogin(!isLogin);
     };
-
-    useEffect(() => {
-        if (isLogin)
-            navigate('/login');
-        else
-            navigate('/signup');
-    }, [isLogin, navigate]);
 
     return (
         <Fragment>

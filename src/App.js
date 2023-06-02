@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {BrowserRouter as Router, Navigate, Route, Routes,} from 'react-router-dom';
+import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import {toast, ToastContainer} from "react-toastify";
 import {Spinner} from "react-bootstrap";
 import {Fragment, useEffect, useState} from "react";
@@ -19,14 +19,12 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const jwt = getJWT();
-
     const protectedRoutes = (
         <Routes>
             <Route path={`/users`}
                    element={<User currUser={currUser} setLoggedIn={setLoggedIn} setCurrUser={setCurrUser}/>}/>
             <Route path="/commodities/:commodityId" element={<Commodity setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
-            <Route path={"/providers/:providerId" } element={<Provider setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
+            <Route path="/providers/:providerId"  element={<Provider setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
             <Route path='/home' element={<Home buyList={currUser.buyList} setCurrUser={setCurrUser}/>}/>
             <Route path='/' element={<Navigate to='/home'/>}/>
         </Routes>
@@ -36,11 +34,9 @@ function App() {
         if (getJWT() !== null) {
             setLoggedIn(true);
             setLoading(true);
-            console.log(getJWT());
             getUser()
                 .then((currUser) => {
                     setCurrUser(currUser);
-                    setLoggedIn(true);
                     setLoading(false);
                 })
                 .catch((e) => {
@@ -49,7 +45,7 @@ function App() {
                     setLoading(false);
                 });
         }
-    }, [jwt]);
+    }, []);
 
     return (
         <Router>
