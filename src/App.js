@@ -13,6 +13,7 @@ import Home from "./home/Home";
 import {getJWT} from "./utils/Session";
 import {getUser} from "./utils/api/Users";
 import Provider from "./provider/Provider";
+import CallBack from "./auth/CallBack";
 
 function App() {
     const [currUser, setCurrUser] = useState({});
@@ -23,8 +24,10 @@ function App() {
         <Routes>
             <Route path={`/users`}
                    element={<User currUser={currUser} setLoggedIn={setLoggedIn} setCurrUser={setCurrUser}/>}/>
-            <Route path="/commodities/:commodityId" element={<Commodity setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
-            <Route path="/providers/:providerId"  element={<Provider setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
+            <Route path="/commodities/:commodityId"
+                   element={<Commodity setCurrUser={setCurrUser} buyList={currUser.buyList}/>}/>
+            <Route path="/providers/:providerId"
+                   element={<Provider setCurrUser={setCurrUser} buyList={currUser.buyList}/>}/>
             <Route path='/home' element={<Home buyList={currUser.buyList} setCurrUser={setCurrUser}/>}/>
             <Route path='/' element={<Navigate to='/home'/>}/>
         </Routes>
@@ -59,7 +62,15 @@ function App() {
                                 {protectedRoutes}
                                 <Footer/>
                             </Fragment>
-                            : <Auth setLoggedIn={setLoggedIn}/>
+                            :
+                            <Fragment>
+                                <Routes>
+                                    <Route path='/login' element={<Auth setLoggedIn={setLoggedIn}/>}></Route>
+                                    <Route path='/signup' element={<Auth setLoggedIn={setLoggedIn}/>}></Route>
+                                    <Route path='/callback' element={<CallBack setLoggedIn={setLoggedIn}/>}></Route>
+                                    <Route path='*' element={<Navigate to='/login'/>}/>
+                                </Routes>
+                            </Fragment>
                 }
                 <ToastContainer position='bottom-left'/>
             </div>

@@ -66,6 +66,18 @@ function Login(props) {
                                 className="btn mt-4">
                             {loading ? <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'login'}
                         </button>
+                        <button
+                            style={{display: "flex", marginLeft: "15%"}}
+                            type="submit"
+                            className="btn mt-2"
+                            onClick={() =>
+                                (window.location.href =
+                                    "https://github.com/login/oauth/authorize?client_id=31ca176f1af22ef04b8f&scope=user")
+                            }
+                        >
+                            <img style={{height: "80%", marginRight: "10px"}} src="/assets/images/svg/others/chestnut.svg" alt="Github logo" />
+                            Login with Github
+                        </button>
                     </div>
                 </div>
             </div>
