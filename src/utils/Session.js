@@ -15,5 +15,10 @@ export function getAuthHeader() {
     if (jwt == null)
         return {};
     else
-        return {'headers': {'Authorization': `Bearer ${jwt}`}};
+        return {
+            headers: {
+                Authorization: jwt
+            },
+            withCredentials: true
+        };
 }
