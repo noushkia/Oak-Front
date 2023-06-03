@@ -18,7 +18,7 @@ import CallBack from "./auth/CallBack";
 function App() {
     const [currUser, setCurrUser] = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const protectedRoutes = (
         <Routes>
@@ -35,19 +35,17 @@ function App() {
 
     useEffect(() => {
         if (getJWT() !== null) {
-            setLoggedIn(true);
-            setLoading(true);
             getUser()
                 .then((currUser) => {
                     setCurrUser(currUser);
+                    setLoggedIn(true);
                     setLoading(false);
                 })
                 .catch((e) => {
                     if (!e.response) toast.error('Connection Error');
-                    setLoggedIn(false);
-                    setLoading(false);
                 });
         }
+        setLoading(false);
     }, []);
 
     return (
@@ -65,9 +63,9 @@ function App() {
                             :
                             <Fragment>
                                 <Routes>
-                                    <Route path='/login' element={<Auth setLoggedIn={setLoggedIn}/>}></Route>
-                                    <Route path='/signup' element={<Auth setLoggedIn={setLoggedIn}/>}></Route>
-                                    <Route path='/callback' element={<CallBack setLoggedIn={setLoggedIn}/>}></Route>
+                                    <Route path='/login' element={<Auth setLoggedIn={setLoggedIn} isLogin={true}/>}></Route>
+                                    <Route path='/signup' element={<Auth setLoggedIn={setLoggedIn} isLogin={false}/>}></Route>
+                                    <Route path='/callback' element={<CallBack loggedIn={loggedIn}/>}></Route>
                                     <Route path='*' element={<Navigate to='/login'/>}/>
                                 </Routes>
                             </Fragment>

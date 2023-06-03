@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export function getJWT() {
     return localStorage.getItem('jwt');
 }
@@ -21,4 +23,8 @@ export function getAuthHeader() {
             },
             withCredentials: true
         };
+}
+
+export async function callBack(_code) {
+    return (await axios.post('http://localhost:8080/callback', {code: _code})).data;
 }

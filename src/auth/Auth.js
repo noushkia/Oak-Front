@@ -6,7 +6,7 @@ import Login from "./login/Login";
 import SignUp from "./signUp/SignUp";
 
 function Auth(props) {
-    const [isLogin, setIsLogin] = useState(true);
+    const [isLogin, setIsLogin] = useState(props.isLogin);
 
     const handleCheckboxChange = () => {
         setIsLogin(!isLogin);
