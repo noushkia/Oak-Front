@@ -53,7 +53,7 @@ function NavBar(props) {
     const location = useLocation();
 
     const handleCartClick = () => {
-        navigate(`/users/${props.currUser.username}`);
+        navigate(`/users`);
     }
 
     return (
@@ -64,7 +64,7 @@ function NavBar(props) {
             </Link>
             {location.pathname === "/home" && <SearchBar/>}
             <Form className="form-inline">
-                <Link className="text" to={`/users/${props.currUser.username}`}>
+                <Link className="text" to={`/users`}>
                     #{props.currUser.username}
                 </Link>
                 <Button className={`btn cart ${Object.keys(props.currUser.buyList.items).length === 0 ? 'empty' : ''}`} type="button" onClick={handleCartClick}>

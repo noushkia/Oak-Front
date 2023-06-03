@@ -5,10 +5,9 @@ import {signUpUser} from "../../utils/api/Users";
 import {toast} from "react-toastify";
 import {Spinner} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {saveUsername} from "../../utils/Session";
 
 
-function SignUp(props) {
+function SignUp() {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -23,9 +22,25 @@ function SignUp(props) {
         }; // cleanup function
     }, []);
 
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
     function signUp(e) {
         e.preventDefault();
         setLoading(true);
+
+        if (!username || !email || !password || !birthDate || !address) {
+            setLoading(false);
+            return toast.error('Please fill in all required fields');
+        }
+
+        if (!isValidEmail(email)) {
+            setLoading(false);
+            return toast.error('Please enter a valid email address');
+        }
+
         const formData = {
             username,
             email,
@@ -34,11 +49,9 @@ function SignUp(props) {
             address,
         };
         signUpUser(formData)
-            .then(user => {
-                saveUsername(username);
-                props.setLoggedIn(true);
+            .then(_ => {
                 console.log('SignUp: success!');
-                navigate("/home");
+                navigate("/login");
             })
             .catch(error => {
                     if (error.response) {
@@ -85,12 +98,24 @@ function SignUp(props) {
                         </div>
                         <div className="form-group mt-2">
                             <input required={true} type="text" name="address" className="form-style"
-                                   placeholder="Your Birth Date" id="logaddress"
+                                   placeholder="Your Address" id="logaddress"
                                    onChange={e => setAddress(e.target.value)}/>
                             <img className="input-icon" src="/assets/images/svg/user/location.svg" alt=""/>
                         </div>
                         <button type="submit" className="btn mt-4" onClick={e => signUp(e)}>
                             {loading ? <Spinner as='span' size='sm-1' role='status' animation="border"/> : 'signup'}
+                        </button>
+                        <button
+                            style={{display: "flex", marginLeft: "15%"}}
+                            type="submit"
+                            className="btn mt-2"
+                            onClick={() =>
+                                (window.location.href =
+                                    "https://github.com/login/oauth/authorize?client_id=31ca176f1af22ef04b8f&scope=user")
+                            }
+                        >
+                            <img style={{height: "80%", marginRight: "10px"}} src="/assets/images/svg/others/chestnut.svg" alt="Github logo" />
+                            Sign Up with Github
                         </button>
                     </div>
                 </div>

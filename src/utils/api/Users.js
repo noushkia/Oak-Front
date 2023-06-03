@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getUsername} from "../Session";
+import {getAuthHeader} from "../Session";
 
 
 export async function loginUser(body) {
@@ -7,29 +7,29 @@ export async function loginUser(body) {
 }
 
 export async function signUpUser(body) {
-    return (await axios.post('http://localhost:8080/api/users', body)).data;
+    return (await axios.post('http://localhost:8080/api/users/signUp', body)).data;
 }
 
-export async function getUser(username) {
-    return  (await axios.get('http://localhost:8080/api/users/' + username)).data;
+export async function getUser() {
+    return (await axios.get('http://localhost:8080/api/users', getAuthHeader())).data;
 }
 
 export async function addCredit(body) {
-    return (await axios.put(`http://localhost:8080/api/users/${getUsername()}/credit`, body)).data;
+    return (await axios.put(`http://localhost:8080/api/users/credit`, body, getAuthHeader())).data;
 }
 
 export async function addDiscount(body) {
-    return (await axios.post(`http://localhost:8080/api/users/${getUsername()}/discounts`, body)).data;
+    return (await axios.post(`http://localhost:8080/api/users/discounts`, body, getAuthHeader())).data;
 }
 
 export async function buy() {
-    return (await axios.post(`http://localhost:8080/api/users/${getUsername()}/buyList/finalize`)).data;
+    return (await axios.post(`http://localhost:8080/api/users/buyList/finalize`, getAuthHeader())).data;
 }
 
 export async function addToBuyList(body) {
-    return (await axios.post(`http://localhost:8080/api/users/${getUsername()}/buyList`, body)).data;
+    return (await axios.post(`http://localhost:8080/api/users/buyList`, body, getAuthHeader())).data;
 }
 
 export async function updateInCart(body) {
-    return (await axios.put(`http://localhost:8080/api/users/${getUsername()}/buyList`, body)).data;
+    return (await axios.put(`http://localhost:8080/api/users/buyList`, body, getAuthHeader())).data;
 }

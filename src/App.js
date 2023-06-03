@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {BrowserRouter as Router, Navigate, Route, Routes,} from 'react-router-dom';
+import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import {toast, ToastContainer} from "react-toastify";
 import {Spinner} from "react-bootstrap";
 import {Fragment, useEffect, useState} from "react";
@@ -10,33 +10,32 @@ import Footer from "./general/footer/Footer";
 import User from "./user/User";
 import Commodity from "./commodity/Commodity";
 import Home from "./home/Home";
-import {getUsername} from "./utils/Session";
+import {getJWT} from "./utils/Session";
 import {getUser} from "./utils/api/Users";
 import Provider from "./provider/Provider";
+import CallBack from "./auth/CallBack";
 
 function App() {
     const [currUser, setCurrUser] = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
-    const [loading, setLoading] = useState(false);
-
-    const username = getUsername();
+    const [loading, setLoading] = useState(true);
 
     const protectedRoutes = (
         <Routes>
-            <Route path={`/users/${currUser.username}`}
+            <Route path={`/users`}
                    element={<User currUser={currUser} setLoggedIn={setLoggedIn} setCurrUser={setCurrUser}/>}/>
-            <Route path="/commodities/:commodityId" element={<Commodity setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
-            <Route path={"/providers/:providerId" } element={<Provider setCurrUser={setCurrUser} buyList={currUser.buyList}/>} />
+            <Route path="/commodities/:commodityId"
+                   element={<Commodity setCurrUser={setCurrUser} buyList={currUser.buyList}/>}/>
+            <Route path="/providers/:providerId"
+                   element={<Provider setCurrUser={setCurrUser} buyList={currUser.buyList}/>}/>
             <Route path='/home' element={<Home buyList={currUser.buyList} setCurrUser={setCurrUser}/>}/>
             <Route path='/' element={<Navigate to='/home'/>}/>
         </Routes>
     )
 
     useEffect(() => {
-        if (username !== '') {
-            setLoggedIn(true);
-            setLoading(true);
-            getUser(username)
+        if (getJWT() !== null) {
+            getUser()
                 .then((currUser) => {
                     setCurrUser(currUser);
                     setLoggedIn(true);
@@ -44,11 +43,10 @@ function App() {
                 })
                 .catch((e) => {
                     if (!e.response) toast.error('Connection Error');
-                    setLoggedIn(false);
-                    setLoading(false);
                 });
         }
-    }, [username]);
+        setLoading(false);
+    }, []);
 
     return (
         <Router>
@@ -62,7 +60,15 @@ function App() {
                                 {protectedRoutes}
                                 <Footer/>
                             </Fragment>
-                            : <Auth setLoggedIn={setLoggedIn}/>
+                            :
+                            <Fragment>
+                                <Routes>
+                                    <Route path='/login' element={<Auth setLoggedIn={setLoggedIn} isLogin={true}/>}></Route>
+                                    <Route path='/signup' element={<Auth setLoggedIn={setLoggedIn} isLogin={false}/>}></Route>
+                                    <Route path='/callback' element={<CallBack loggedIn={loggedIn}/>}></Route>
+                                    <Route path='*' element={<Navigate to='/login'/>}/>
+                                </Routes>
+                            </Fragment>
                 }
                 <ToastContainer position='bottom-left'/>
             </div>
