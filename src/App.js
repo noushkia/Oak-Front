@@ -29,7 +29,7 @@ function App() {
             <Route path="/providers/:providerId"
                    element={<Provider setCurrUser={setCurrUser} buyList={currUser.buyList}/>}/>
             <Route path='/home' element={<Home buyList={currUser.buyList} setCurrUser={setCurrUser}/>}/>
-            <Route path='/' element={<Navigate to='/home'/>}/>
+            <Route path='*' element={<Navigate to='/home'/>}/>
         </Routes>
     )
 
@@ -45,8 +45,11 @@ function App() {
                     if (!e.response) toast.error('Connection Error');
                 });
         }
-        setLoading(false);
-    }, []);
+        else {
+            setLoading(false);
+        }
+
+    }, [loading]);
 
     return (
         <Router>
@@ -63,9 +66,9 @@ function App() {
                             :
                             <Fragment>
                                 <Routes>
-                                    <Route path='/login' element={<Auth setLoggedIn={setLoggedIn} isLogin={true}/>}></Route>
-                                    <Route path='/signup' element={<Auth setLoggedIn={setLoggedIn} isLogin={false}/>}></Route>
-                                    <Route path='/callback' element={<CallBack loggedIn={loggedIn}/>}></Route>
+                                    <Route path='/login' element={<Auth setLoading={setLoading} isLogin={true}/>}></Route>
+                                    <Route path='/signup' element={<Auth setLoading={setLoading} isLogin={false}/>}></Route>
+                                    <Route path='/callback' element={<CallBack setLoading={setLoading} loggedIn={loggedIn}/>}></Route>
                                     <Route path='*' element={<Navigate to='/login'/>}/>
                                 </Routes>
                             </Fragment>

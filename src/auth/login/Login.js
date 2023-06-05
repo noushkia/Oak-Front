@@ -29,8 +29,8 @@ function Login(props) {
         loginUser(formData)
             .then(jwt => {
                 saveJWT(jwt)
-                props.setLoggedIn(true);
                 console.log('Login: success!');
+                props.setLoading(true);
                 navigate("/home");
             }).catch(error => {
             if (error.response) {

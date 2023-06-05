@@ -23,7 +23,7 @@ export async function addDiscount(body) {
 }
 
 export async function buy() {
-    return (await axios.post(`http://localhost:8080/api/users/buyList/finalize`, getAuthHeader())).data;
+    return (await axios.post(`http://localhost:8080/api/users/buyList/finalize`, {}, getAuthHeader())).data;
 }
 
 export async function addToBuyList(body) {
